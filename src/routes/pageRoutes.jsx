@@ -8,6 +8,7 @@ const pageRoutes = [
   { path: "/shop", element: <ProductsPage /> },
   { path: "/cart", element: <Cart /> },
   { path: "/wishlist", element: <WishList /> },
+  
 ];
 
 export default pageRoutes;

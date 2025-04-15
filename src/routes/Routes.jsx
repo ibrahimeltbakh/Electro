@@ -9,6 +9,7 @@ export default function Routes() {
       path: "/",
       element: <Layout />,
       children: pageRoutes, 
+      
     },
   ]);
 
