@@ -1,12 +1,16 @@
-import { useDispatch } from "react-redux";
-import { fetchCartData } from "../RTK/Slices/cartSlicewithAPI";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import api from "@/lib/axios";
 
 const useCart = () => {
-  const dispatch = useDispatch();
+  const token = localStorage.getItem("userToken");
   const fetchCartProducts = async () => {
-    const response = await dispatch(fetchCartData());
-    return response.payload;
+    const response = await axios.get(`${api}/cart`, {
+      headers: {
+        token,
+      },
+    });
+    return response.data;
   };
   const cartProducts = useQuery({
     queryKey: ["cart"],
