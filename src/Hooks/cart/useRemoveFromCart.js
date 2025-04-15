@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import removeFromCart from "./cartFunctions";
+import { removeFromCart } from "./cartFunctions";
 import toast from "react-hot-toast";
 
 const useRemoveFromCart = () => {
