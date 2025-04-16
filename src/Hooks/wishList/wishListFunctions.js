@@ -7,16 +7,20 @@ const getToken = () => {
     );
 };
 
-export const GetCartProducts = async () => {
-    const response = await api.get("/cart", {
-        headers: { token: getToken() },
-    });
+export const GetWishListProducts = async () => {
+    const response = await api.get(
+        "/wishlist",
+        {
+            headers: { token: getToken() },
+        }
+    );
     return response.data;
 };
 
-export const addtoCart = async (productId) => {
+
+export const addtoWishlist = async (productId) => {
     const response = await api.post(
-        "/cart",
+        "/wishList",
         { productId },
         {
             headers: { token: getToken() },
@@ -25,31 +29,18 @@ export const addtoCart = async (productId) => {
     return response.data;
 };
 
-export const removeFromCart = async (productId) => {
-    const response = await api.delete(`/cart/${productId}`, {
+export const removeFromWishlist = async (productId) => {
+    const response = await api.delete(`/wishList/${productId}`, {
         headers: { token: getToken() },
     });
     return response.data;
 };
 
-export const updateCart = async (productId, quantity) => {
-    if (!productId || quantity < 1) {
-        throw new Error("Invalid productId or quantity");
-    }
 
-    const response = await api.put(
-        `/cart/${productId}`,
-        { quantity },
-        {
-            headers: { token: getToken() },
-        }
-    );
-    return response.data;
-};
 
-export const clearCart = async () => {
+export const clearWishlist = async () => {
     const response = await api.put(
-        "/cart",
+        "/wishList",
         {},
         {
             headers: { token: getToken() },
