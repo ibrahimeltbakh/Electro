@@ -9,7 +9,9 @@ export const GetCartProducts = async () => {
 };
 
 export const addtoCart = async (productId) => {
-    const token = localStorage.getItem("userToken");
+    // const token = localStorage.getItem("userToken");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZlYWIzY2FhODQxYWVmMjAyYWZiNTYiLCJlbWFpbCI6ImhlbWFAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDQ3NDMyNTV9.W_g01fxCrXHxiTFHV1jArSvaVHG8dCvlEv1jGtOYme8"
+
     const response = await api.post(
         "/cart",
         { productId },
@@ -30,10 +32,14 @@ export const removeFromCart = async (productId) => {
 };
 
 export const updateCart = async (productId, quantity) => {
-    const token = localStorage.getItem("userToken");
+    if (!productId || quantity < 1) {
+        throw new Error("Invalid productId or quantity");
+    }
+    // const token = localStorage.getItem("userToken");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZlYWIzY2FhODQxYWVmMjAyYWZiNTYiLCJlbWFpbCI6ImhlbWFAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDQ3NDMyNTV9.W_g01fxCrXHxiTFHV1jArSvaVHG8dCvlEv1jGtOYme8"
     const response = await api.put(
-        "/cart",
-        { productId, quantity },
+        `/cart/${productId}`,
+        { quantity },
         {
             headers: { token },
         }
@@ -42,9 +48,11 @@ export const updateCart = async (productId, quantity) => {
 };
 
 export const clearCart = async () => {
-    const token = localStorage.getItem("userToken");
+    // const token = localStorage.getItem("userToken");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZlYWIzY2FhODQxYWVmMjAyYWZiNTYiLCJlbWFpbCI6ImhlbWFAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDQ3NDMyNTV9.W_g01fxCrXHxiTFHV1jArSvaVHG8dCvlEv1jGtOYme8"
+
     const response = await api.put(
-        "/cart/clear", // تأكد إن الـ endpoint ده صحيح حسب الـ API
+        "/cart",
         {},
         {
             headers: { token },

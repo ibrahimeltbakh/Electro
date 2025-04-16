@@ -3,14 +3,14 @@ import { updateCart } from "./cartFunctions";
 import toast from "react-hot-toast";
 
 
-const useUpdateFromCart = () => {
-    const query = useQueryClient;
+const useUpdateCart = () => {
+    const query = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: updateCart,
+        mutationFn: ({ productId, quantity }) => updateCart(productId, quantity),
         onSuccess: () => {
             query.invalidateQueries(["cart"]);
-            toast.success("Item updated to cart ✅");
+            toast.success("Item updated successfully ✅");
         },
         onError: (error) => {
             console.error("Error updating to cart:", error);
@@ -21,4 +21,4 @@ const useUpdateFromCart = () => {
 
 }
 
-export default useUpdateFromCart;
+export default useUpdateCart;

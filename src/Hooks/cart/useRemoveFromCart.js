@@ -6,7 +6,7 @@ const useRemoveFromCart = () => {
   const query = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: removeFromCart,
+    mutationFn: ({ productId }) => removeFromCart(productId),
     onSuccess: () => {
       query.invalidateQueries(["cart"]);
       toast.success("Item removed from cart ✅");

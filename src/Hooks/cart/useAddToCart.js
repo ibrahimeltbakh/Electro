@@ -6,7 +6,7 @@ const useAddToCart = () => {
   const query = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: addtoCart,
+    mutationFn: ({ productId }) => addtoCart(productId),
     onSuccess: () => {
       query.invalidateQueries(["cart"]);
       toast.success("Item added to cart ✅");
