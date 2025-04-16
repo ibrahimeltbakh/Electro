@@ -5,5 +5,5 @@ export default function ProductsPage() {
 
 
 
-  return <RecentProducts numberOfProducts={12} />;
+  return <RecentProducts numberOfProducts={12} start={0} />;
 }
