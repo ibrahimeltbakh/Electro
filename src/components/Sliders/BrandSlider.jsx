@@ -2,12 +2,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { RiseLoader } from "react-spinners";
-import useCategories from "../../Hooks/category/usecatergories";
+import useBrands from "../../Hooks/Brands/useBrands";
 import Error from "../Error/Error";
 import Loading from "../Loading/Loading";
 
-const CategoriesSlider = () => {
-  const { data, isLoading, isError, error } = useCategories();
+const BrandSlider = () => {
+  const { data, isLoading, isError, error } = useBrands();
   console.log(data);
 
   const settings = {
@@ -65,21 +65,19 @@ const CategoriesSlider = () => {
   return (
     <div className="section p-section bg-inherit overflow-hidden">
       <div className="container-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">Categories</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Brands</h2>
         <div className="row category-section">
           <Slider {...settings}>
-            {data?.categories?.map((category) => (
-              <div key={category._id} className="p-2 ">
-                <div className="category-card  rounded-lg p-4 shadow-md bg-inherit flex flex-col items-center ">
+            {data?.brands?.map((brand) => (
+              <div key={brand._id} className="p-2">
+                <div className=" border rounded-lg p-4 shadow-md h-20 flex flex-col items-center">
                   <img
-                    src={category.image.
+                    src={brand.image.
                       secure_url}
-                    alt={category.name}
-                    className="w-full h-full rounded-lg object-contain mb-3"
+                    alt={brand.name}
+                    className="w-full h-full object-contain mb-3"
                   />
-                  <p variant="h6" className=" bg-amber-200  w-full  text-center font-semibold text-amber-950">
-                    {category.name}
-                  </p>
+                 
                 </div>
               </div>
             ))}
@@ -90,4 +88,4 @@ const CategoriesSlider = () => {
   );
 };
 
-export default CategoriesSlider;
+export default BrandSlider;
