@@ -22,9 +22,9 @@ export default function Cart() {
     );
   }
   return (
-    <div className="container  m-auto flex flex-col justify-center gap-3 items-center mt-10 ">
-      <h1 className="text-secondary-foreground mt-10 text-3xl font-bold ">
-        Your Products
+    <div className="container m-auto flex flex-col justify-center gap-3 items-center mt-10 ">
+      <h1 className="text-secondary-foreground text-3xl font-bold ">
+        Your Cart Products
       </h1>
 
       <CartTable
