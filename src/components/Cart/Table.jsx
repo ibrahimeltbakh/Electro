@@ -8,6 +8,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import RemoveButton from "./Buttons/RemoveButton";
+import PlusButton from "./Buttons/PlusQuantity";
+import MinusButton from "./Buttons/minusQuantity";
+import ClearCartButton from "./Buttons/ClearCartButton";
+import AddToCartButton from "./Buttons/AddToCartButton";
 
 const tableHead = [
   { title: "Product Name", key: "name" },
@@ -21,58 +25,74 @@ const tableHead = [
 
 export default function CartTable({ cartProducts, total }) {
   return (
-    <Table className="w-full text-sm">
-      <TableHeader className="bg-gray-100 dark:bg-gray-700">
+    <Table className="w-full text-md my-6 border rounded-lg overflow-hidden">
+      <TableHeader className="bg-muted text-muted-foreground dark:bg-muted/50">
         <TableRow>
           {tableHead.map((item) => (
             <TableHead
               key={item.key}
-              className="px-4 py-2 text-left font-semibold">
+              className="px-6 py-3 text-center font-semibold uppercase tracking-wide">
               {item.title}
             </TableHead>
           ))}
         </TableRow>
       </TableHeader>
-      <TableBody className="divide-y divide-gray-200 dark:divide-gray-600">
+
+      <TableBody className="divide-y divide-border">
         {cartProducts.map((product) => (
           <TableRow
-            key={product?.productId.id}
-            className="hover:bg-gray-50 dark:hover:bg-gray-600">
-            <TableCell className="px-4 py-2">
+            key={product?.productId?.id}
+            className="hover:bg-accent/30 transition-colors text-center">
+            <TableCell className="px-6 py-3">
               {product?.productId?.title}
             </TableCell>
-            <TableCell className="px-4 py-2">
+            <TableCell className="px-6 py-3">
               <img
                 src={product?.productId?.imageCover?.secure_url}
                 alt={product?.productId?.title}
                 width={50}
                 height={50}
-                className="rounded-md"
+                className="rounded-md mx-auto"
               />
             </TableCell>
-            <TableCell className="px-4 py-2">
+            <TableCell className="px-6 py-3">
               {product?.productId?.price}
             </TableCell>
-            <TableCell className="px-4 py-2">
-              {product?.productId?.discount}
+            <TableCell className="px-6 py-3">
+              {product?.productId?.discount <= 1
+                ? `-`
+                : `${product?.productId?.discount}%`}
             </TableCell>
-            <TableCell className="px-4 py-2">
+            <TableCell className="px-6 py-3">
               {product?.productId?.priceAfterDiscount}
             </TableCell>
-            <TableCell className="px-4 py-2">{product?.quantity}</TableCell>
-            <TableCell className="px-4 py-2">
-              <RemoveButton productId={product?._id} />
+            <TableCell className="px-6 py-3">
+              <div className="flex gap-2 items-center justify-center ">
+                <PlusButton
+                  productId={product?.productId?._id}
+                  quantity={product?.quantity}
+                />
+                <span className="mx-1">{product?.quantity}</span>
+                <MinusButton
+                  productId={product?.productId?._id}
+                  quantity={product?.quantity}
+                />
+              </div>
+            </TableCell>
+            <TableCell className="px-6 py-3 ">
+              <RemoveButton productId={product?.productId?._id} />
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter className="bg-gray-100 dark:bg-gray-700">
+
+      <TableFooter className="bg-muted  dark:bg-muted/50">
         <TableRow>
-          <TableCell colSpan={6} className="px-4 py-2 text-left font-semibold">
-            Total Price
+          <TableCell colSpan={4} className="px-6 py-3  text-left font-medium">
+            {`Total Price: ${total}`}
           </TableCell>
-          <TableCell className="px-4 py-2 text-left font-semibold text-lg">
-            {total}
+          <TableCell colSpan={3} className="px-6 py-3 text-right">
+            <ClearCartButton />
           </TableCell>
         </TableRow>
       </TableFooter>
