@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import removeFromCart from "./cartFunctions";
+import { removeFromCart } from "./cartFunctions";
 import toast from "react-hot-toast";
 
 const useRemoveFromCart = () => {
   const query = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: removeFromCart,
+    mutationFn: ({ productId }) => removeFromCart(productId),
     onSuccess: () => {
       query.invalidateQueries(["cart"]);
       toast.success("Item removed from cart ✅");
