@@ -38,7 +38,7 @@ export default function CartTable({ cartProducts, total }) {
         </TableRow>
       </TableHeader>
 
-      <TableBody className="divide-y divide-border">
+      <TableBody className="divide-y divide-border ">
         {cartProducts.map((product) => (
           <TableRow
             key={product?.productId?.id}
