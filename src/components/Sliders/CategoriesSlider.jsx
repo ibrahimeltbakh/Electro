@@ -63,7 +63,7 @@ const CategoriesSlider = () => {
   }
 
   return (
-    <div className="section p-section bg-inherit overflow-hidden">
+    <div className="container section p-section bg-inherit overflow-hidden">
       <div className="container-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Categories</h2>
         <div className="row category-section">

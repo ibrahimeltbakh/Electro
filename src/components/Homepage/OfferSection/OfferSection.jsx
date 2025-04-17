@@ -5,6 +5,8 @@ import bgImageDark from "../../../assets/Images/hotdeal_dark.png";
 
 
 const OfferSection = () => {
+const them =localStorage.getItem("vite-ui-theme");
+
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -14,7 +16,7 @@ const OfferSection = () => {
   });
 
   const calculateCountdown = useCallback(() => {
-    const targetDate = new Date("Apr 1, 2025").getTime();
+    const targetDate = new Date("may 1, 2025").getTime();
     const now = new Date().getTime();
     let difference = targetDate - now;
 
@@ -38,17 +40,17 @@ const OfferSection = () => {
   }, [calculateCountdown]);
 
   return (
-    <section id="hot-deal" className="relative">
+    <section id="hot-deal" className="relative container rounded-lg ">
       <div
         className="bg-cover bg-center bg-no-repeat"
         style={{
-        //   backgroundImage: `url(${isDark ? bgImageDark : bgImageLight})`,
-        backgroundImage: `url(${bgImageLight})`,
+          backgroundImage: `url(${them=="dark" ? bgImageDark : bgImageLight})`,
+      
         }}
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center py-12 px-4 sm:px-6 lg:px-8">
-            <p className="text-white text-lg font-light px-6 py-2 rounded-t-full absolute top-0 left-1/2 transform -translate-x-1/2 bg-red-600">
+            <p className="text-white text-lg font-light px-6 py-2 rounded-b-full absolute top-0 left-1/2 transform -translate-x-1/2 bg-red-600">
               DEAL OF THE DAY
             </p>
             <ul className="flex justify-center space-x-2 mb-10 mt-12">

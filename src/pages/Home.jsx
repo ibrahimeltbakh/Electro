@@ -12,12 +12,12 @@ export default function Home() {
     <>
     <HeroSection />
     <BrandSlider />
-    <CategoriesSlider />
       <Banner />
       <OfferSection />
       <RecentProducts numberOfProducts={4} start={0} />
       <OurCustummer />
       <RecentProducts numberOfProducts={8} start={4} />
+      <CategoriesSlider />
       <RecentProducts numberOfProducts={12} start={8} />
       <RecentProducts numberOfProducts={16} start={12} />
       
