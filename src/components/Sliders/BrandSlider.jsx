@@ -63,7 +63,7 @@ const BrandSlider = () => {
   }
 
   return (
-    <div className="section p-section bg-inherit overflow-hidden">
+    <div className="section p-section bg-inherit overflow-hidden container">
       <div className="container-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Brands</h2>
         <div className="row category-section">
