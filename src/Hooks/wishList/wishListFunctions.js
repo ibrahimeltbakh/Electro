@@ -2,9 +2,7 @@ import api from "@/lib/axios";
 
 const getToken = () => {
     return (
-        localStorage.getItem("token") 
-        // ||"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2ZlYWIzY2FhODQxYWVmMjAyYWZiNTYiLCJlbWFpbCI6ImhlbWFAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDQ3NDMyNTV9.W_g01fxCrXHxiTFHV1jArSvaVHG8dCvlEv1jGtOYme8"
-    );
+        localStorage.getItem("token"));
 };
 
 export const GetWishListProducts = async () => {

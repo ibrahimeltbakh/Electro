@@ -1,6 +1,7 @@
 import Login from "@/components/Auth/Login";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import ResetPassword from "@/components/Auth/ResetPassword";
+import Admin from "@/pages/Admin";
 import Cart from "@/pages/Cart";
 import Home from "@/pages/Home";
 import ProductsPage from "@/pages/ProductsPage";
@@ -32,8 +33,8 @@ const pageRoutes = [
   {
     path: "/admin",
     element: (
-      <ProtectedRoute role="admin">
-        <div>Admin Dashboard</div> 
+      <ProtectedRoute>
+        <Admin />
       </ProtectedRoute>
     ),
   },

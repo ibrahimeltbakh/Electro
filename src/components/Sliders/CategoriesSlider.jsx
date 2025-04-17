@@ -47,7 +47,9 @@ const CategoriesSlider = () => {
   if (isError) {
     return (
       <>
-        <div><Error /></div>
+        <div>
+          <Error />
+        </div>
       </>
     );
   }
@@ -72,12 +74,13 @@ const CategoriesSlider = () => {
               <div key={category._id} className="p-2 ">
                 <div className="category-card  rounded-lg p-4 shadow-md bg-inherit flex flex-col items-center ">
                   <img
-                    src={category.image.
-                      secure_url}
+                    src={category.image.secure_url}
                     alt={category.name}
                     className="w-full h-full rounded-lg object-contain mb-3"
                   />
-                  <p variant="h6" className=" bg-amber-200  w-full  text-center font-semibold text-amber-950">
+                  <p
+                    variant="h6"
+                    className=" bg-amber-200  w-full  text-center font-semibold text-amber-950">
                     {category.name}
                   </p>
                 </div>
