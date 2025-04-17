@@ -7,10 +7,12 @@ import RecentProducts from '@/components/recent Products/RecentProducts'
 import CategoriesSlider from '@/components/Sliders/CategoriesSlider'
 import BrandSlider from '@/components/Sliders/BrandSlider'
 import HeroSection from '@/components/Homepage/HeroSection'
+import NewsLetter from '@/components/Homepage/NewsLetter'
 export default function Home() {
   return (
     <>
     <HeroSection />
+
     <BrandSlider />
       <Banner />
       <OfferSection />
@@ -20,7 +22,6 @@ export default function Home() {
       <CategoriesSlider />
       <RecentProducts numberOfProducts={12} start={8} />
       <RecentProducts numberOfProducts={16} start={12} />
-      
     </>
   )
 }

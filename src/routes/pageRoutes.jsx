@@ -6,10 +6,13 @@ import Home from "@/pages/Home";
 import ProductsPage from "@/pages/ProductsPage";
 import RegisterPage from "@/pages/Register";
 import WishList from "@/pages/WishList";
-
+import Categories from "@/pages/Categories";
+import Brands from "@/pages/Brands";
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
+  { path: "/categories", element: <Categories /> },
+  { path: "/brands", element: <Brands /> },
   {
     path: "/cart",
     element: (
