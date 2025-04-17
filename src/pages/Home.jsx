@@ -15,7 +15,7 @@ export default function Home() {
     <CategoriesSlider />
       <Banner />
       <OfferSection />
-      <RecentProducts numberOfProducts={4} start={0} />
+      <RecentProducts  name={'Best Seller'}/>
       <OurCustummer />
       <RecentProducts numberOfProducts={8} start={4} />
       <RecentProducts numberOfProducts={12} start={8} />
