@@ -25,7 +25,7 @@ const tableHead = [
 
 export default function CartTable({ cartProducts, total }) {
   return (
-    <Table className="w-full text-md my-6 border rounded-lg overflow-hidden">
+    <Table className=" w-full text-md my-6 border rounded-lg overflow-hidden ">
       <TableHeader className="bg-muted text-muted-foreground dark:bg-muted/50">
         <TableRow>
           {tableHead.map((item) => (
