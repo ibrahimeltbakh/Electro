@@ -11,6 +11,7 @@ import Categories from "@/pages/Categories";
 import Brands from "@/pages/Brands";
 import ProductDetails from "@/pages/ProductDetails";
 import BrandsDetails from "@/pages/BrandsDetails";
+import Profile from "@/pages/Profile";
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -57,6 +58,14 @@ const pageRoutes = [
     element: (
       <ProtectedRoute>
         <Admin />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/profile',
+    element: (
+      <ProtectedRoute>
+        <Profile />
       </ProtectedRoute>
     ),
   },
