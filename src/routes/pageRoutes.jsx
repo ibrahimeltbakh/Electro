@@ -9,6 +9,7 @@ import RegisterPage from "@/pages/Register";
 import WishList from "@/pages/WishList";
 import Categories from "@/pages/Categories";
 import Brands from "@/pages/Brands";
+import Profile from "@/pages/Profile";
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -38,6 +39,14 @@ const pageRoutes = [
     element: (
       <ProtectedRoute>
         <Admin />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/profile',
+    element: (
+      <ProtectedRoute>
+        <Profile />
       </ProtectedRoute>
     ),
   },
