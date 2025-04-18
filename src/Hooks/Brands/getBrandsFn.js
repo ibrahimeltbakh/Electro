@@ -8,4 +8,12 @@ import api from "@/lib/axios";
     return response.data;  
 };
 
+
+export const GetBrandById = async (id) => {
+    const response = await api.get(`/brands/${id}`);
+    return response.data;
+};
+
+
+
 export default GetBrands;

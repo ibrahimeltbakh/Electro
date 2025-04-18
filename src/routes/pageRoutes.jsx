@@ -9,11 +9,22 @@ import RegisterPage from "@/pages/Register";
 import WishList from "@/pages/WishList";
 import Categories from "@/pages/Categories";
 import Brands from "@/pages/Brands";
+import ProductDetails from "@/pages/ProductDetails";
+import BrandsDetails from "@/pages/BrandsDetails";
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
   { path: "/categories", element: <Categories /> },
   { path: "/brands", element: <Brands /> },
+  {
+    path: "/brands/:id",
+    element: (
+      <ProtectedRoute>
+        <BrandsDetails />
+      </ProtectedRoute>
+    ),
+  },
+
   {
     path: "/cart",
     element: (
@@ -27,6 +38,14 @@ const pageRoutes = [
     element: (
       <ProtectedRoute>
         <WishList />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/product/:id",
+    element: (
+      <ProtectedRoute>
+        <ProductDetails />
       </ProtectedRoute>
     ),
   },
