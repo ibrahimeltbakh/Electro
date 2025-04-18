@@ -4,14 +4,11 @@ import Loading from '@/components/Loading/Loading'
 import Error from '@/components/Error/Error'
 import ProductCard from '@/components/Cards/ProductCard'
 
-
 const RecentProducts = ({ numberOfProducts, start, name }) => {
   start = start || 0;
   numberOfProducts = numberOfProducts || 8;
   name = name || "Products"
-
   const { data, isLoading, isError, error } = useProducts();
-
 
   if (isError) {
     return (
