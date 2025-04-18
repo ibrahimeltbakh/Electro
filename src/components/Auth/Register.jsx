@@ -100,13 +100,13 @@ const Register = () => {
                 variants={inputAnimation}
                 className="relative"
               >
-                <div className="absolute left-3 top-3 text-sky-400 z-10">
+                <div className="absolute  left-3 top-3 text-sky-400 z-10">
                   <field.icon />
                 </div>
                 {field.type === 'textarea' ? (
                   <textarea
                     placeholder={field.placeholder}
-                    className={`w-full pl-10 pr-4 py-2 border ${errors[field.name] ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300`}
+                    className={`w-full pl-10 dark:text-black pr-4 py-2 border ${errors[field.name] ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300`}
                     {...register(field.name, {
                       required: `${field.placeholder} is required`,
                       ...(field.name === 'address' && {
@@ -118,7 +118,7 @@ const Register = () => {
                   <input
                     type={field.type}
                     placeholder={field.placeholder}
-                    className={`w-full pl-10 pr-4 py-2 border ${errors[field.name] ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300`}
+                    className={`w-full pl-10 pr-4 py-2 dark:text-black border ${errors[field.name] ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300`}
                     {...register(field.name, {
                       required: `${field.placeholder} is required`,
                       ...(field.name === 'email' && {
