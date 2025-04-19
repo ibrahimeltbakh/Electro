@@ -199,7 +199,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Products */}
-        <div className="w-full md:w-2/3 lg:w-3/4 mt-6 md:mt-0 md:pl-4">
+        <div className=" bg-amber-800    w-full md:w-2/3 lg:w-3/4 mt-6 md:mt-0 md:pl-4">
           <div className="w-full">
             {filteredProduct.length > 0 ? (
               <>
@@ -210,7 +210,7 @@ export default function ProductsPage() {
                   <h1 className="text-2xl font-bold mb-6 text-center">
                     {name}
                   </h1>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
                     {filteredProduct.map(
                       (product, index) =>
                         index >= start &&

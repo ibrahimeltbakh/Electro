@@ -5,6 +5,7 @@ import Loading from '@/components/Loading/Loading';
 import Error from '@/components/Error/Error';
 export default function Categories() {
   const { data, isLoading, isError } = useCategories();
+  console.log(data)
   if (isLoading) return <Loading />;
   if (isError) return <Error/>;
 

@@ -1,23 +1,10 @@
-// import React from 'react'
-// import { Link } from 'react-router-dom'
-// export default function BrandsCard({brand}) {
-//   return (
-//     <Link to={`/brands/${brand._id}`} className="block">
-//     <div>
-//         <img src={brand.image.secure_url} alt={brand.name} />
-//         <h2>{brand.name}</h2>
-//     </div>
-//     </Link>
-//   )
-// }
-
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function BrandsCard({ brand }) {
   return (
-    <Link to={`/brands/${brand._id}`} className="block">
+    <Link to={`/brands/${brand.name}`} className="block">
       <div className="group relative overflow-hidden rounded-xl shadow-md bg-white transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
         <div className="overflow-hidden">
           <img

@@ -12,6 +12,7 @@ import Brands from "@/pages/Brands";
 import ProductDetails from "@/pages/ProductDetails";
 import BrandsDetails from "@/pages/BrandsDetails";
 import Profile from "@/pages/Profile";
+import CategoryDetails from "@/pages/CategoryDetails";
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -20,9 +21,17 @@ const pageRoutes = [
   {
     path: "/brands/:id",
     element: (
-      <ProtectedRoute>
+     
         <BrandsDetails />
-      </ProtectedRoute>
+     
+    ),
+  },  
+  {
+    path: "/categories/:id",
+    element: (
+      
+        <CategoryDetails />
+    
     ),
   },
 
