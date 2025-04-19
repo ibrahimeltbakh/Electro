@@ -11,7 +11,7 @@ import EditProfileForm from '@/components/UserProfile/EditProfileForm';
 import ChangePasswordForm from '@/components/UserProfile/ChangePasswordForm';
 
 const UserProfile = () => {
-  const { user, token, login, logout } = useContext(AuthContext);
+  const { user, token, login, logout, refreshUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
@@ -62,7 +62,7 @@ const UserProfile = () => {
 
   const updateMutation = useMutation({
     mutationFn: (data) => updateUser(token, data),
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       const updatedUser = {
         ...user,
         name: data.name || user.name,
@@ -71,6 +71,8 @@ const UserProfile = () => {
         address: data.address || user.address,
       };
       login(token, user.role, updatedUser);
+      // Refresh user data from the API to reflect the change on the ui without needing to logout and login again
+      await refreshUser(token); 
       toast.success('Account updated successfully!');
       setIsEditing(false);
       resetUpdate(updatedUser);
