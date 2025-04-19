@@ -1,3 +1,4 @@
+import { getUserProfile } from '@/api/auth/auth';
 import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext();
@@ -56,8 +57,25 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('userData');
   };
 
+  const refreshUser = async (token) => {
+    try {
+      const response = await getUserProfile(token);
+      const updatedUserData = {
+        name: response.user?.name || response.name || '',
+        email: response.user?.email || response.email || '',
+        phone: response.user?.phone || response.phone || '',
+        address: response.user?.address || response.address || '',
+        imageUrl: response.user?.imageUrl || response.imageUrl || response.image || response.profileImage || '',
+      };
+      setUser(updatedUserData);
+      localStorage.setItem('userData', JSON.stringify(updatedUserData));
+    } catch (error) {
+      console.error('Error refreshing user data:', error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, role, login, logout }}>
+    <AuthContext.Provider value={{ user, token, role, login, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );
