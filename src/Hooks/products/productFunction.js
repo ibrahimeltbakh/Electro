@@ -1,7 +1,9 @@
 import api from "@/lib/axios";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 
+
+const getToken = () => {
+    return localStorage.getItem("token");
+}
 export const GetProducts = async () => {
     const response = await api.get("/products", {
 
@@ -11,8 +13,12 @@ export const GetProducts = async () => {
 };
 
 
-export const GetProductById = async (id) => {
-    const response = await api.get(`/products/${id}`);
+
+export const GetSpacificProduct = async (productId) => {
+    const response = await api.get(`/products/${productId}`, {
+        headers: { token: getToken() },
+    });
+
     return response.data;
 };
 
