@@ -1,7 +1,7 @@
 import Login from "@/components/Auth/Login";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import ResetPassword from "@/components/Auth/ResetPassword";
-import Admin from "@/pages/Admin";
+import AdminDashboard from "@/pages/Admin/AdminDashboard";
 import Cart from "@/pages/Cart";
 import Home from "@/pages/Home";
 import ProductsPage from "@/pages/ProductsPage";
@@ -13,6 +13,9 @@ import ProductDetails from "@/pages/ProductDetails";
 import BrandsDetails from "@/pages/BrandsDetails";
 import Profile from "@/pages/Profile";
 import CategoryDetails from "@/pages/CategoryDetails";
+import { Children } from "react";
+import adminRoutes from "./adminRoutes";
+
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -20,19 +23,11 @@ const pageRoutes = [
   { path: "/brands", element: <Brands /> },
   {
     path: "/brands/:id",
-    element: (
-     
-        <BrandsDetails />
-     
-    ),
-  },  
+    element: <BrandsDetails />,
+  },
   {
     path: "/categories/:id",
-    element: (
-      
-        <CategoryDetails />
-    
-    ),
+    element: <CategoryDetails />,
   },
 
   {
@@ -63,15 +58,16 @@ const pageRoutes = [
   { path: "/register", element: <RegisterPage /> },
   { path: "/reset-password", element: <ResetPassword /> },
   {
-    path: "/admin",
+    path: "/admin/*",
     element: (
       <ProtectedRoute>
-        <Admin />
+        <AdminDashboard />
       </ProtectedRoute>
     ),
+    children: adminRoutes,
   },
   {
-    path: '/profile',
+    path: "/profile",
     element: (
       <ProtectedRoute>
         <Profile />
