@@ -1,7 +1,7 @@
 import Loading from "@/components/Loading/Loading";
 import useProducts from "@/Hooks/products/useProducts";
 import React from "react";
-import ProductsTable from "./ProductsTable";
+import ProductsTable from "../../../components/Admin/Products/ProductsTable";
 
 export default function Products() {
   const { data, isLoading, isError, error } = useProducts();
