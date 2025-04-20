@@ -5,13 +5,14 @@ import { GetProductById } from '@/Hooks/products/productFunction'
 import { FaStar, FaShoppingCart, FaHeart } from 'react-icons/fa'
 import useAddToCart from '@/Hooks/cart/useAddToCart'
 import useAddToWishlist from '@/Hooks/wishList/useAddToWishlist'
-
+import ReviewForm from '@/components/Reviews/ReviewForm'
 import { motion } from 'framer-motion'
 
 export default function ProductDetails() {
   const { mutate } = useAddToCart()
     const mutation = useAddToWishlist()
   const { id } = useParams()
+
   const [selectedImage, setSelectedImage] = useState(0)
   const { data } = useQuery({
     queryKey: ['product', id],
@@ -153,6 +154,10 @@ export default function ProductDetails() {
           </div>
         </motion.div>
       </div>
+      {/* <ReviewForm productId={id} />
+      {console.log(id)} */}
+     
     </div>
+    
   )
 }
