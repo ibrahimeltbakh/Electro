@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -182,6 +183,9 @@ export default function ProductDetails() {
           </div>
         </motion.div>
       </div>
+      {/* <ReviewForm productId={id} />
+      {console.log(id)} */}
+     
     </div>
-  );
+
 }
