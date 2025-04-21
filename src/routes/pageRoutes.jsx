@@ -15,7 +15,7 @@ import Profile from "@/pages/Profile";
 import CategoryDetails from "@/pages/CategoryDetails";
 import { Children } from "react";
 import adminRoutes from "./adminRoutes";
-
+import CashOrder from "@/pages/CashOrder";
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -35,6 +35,14 @@ const pageRoutes = [
     element: (
       <ProtectedRoute>
         <Cart />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/order",
+    element: (
+      <ProtectedRoute>
+        <CashOrder />
       </ProtectedRoute>
     ),
   },
