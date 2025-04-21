@@ -7,8 +7,12 @@ import AddBrand from "@/pages/Admin/Brands/AddBrand";
 import UpdateProduct from "@/pages/Admin/Products/UpdateProduct";
 import UpdateCategory from "@/pages/Admin/Categories/UpdateCategory";
 import UpdateBrand from "@/pages/Admin/Brands/UpdateBrans";
+import Home from "@/pages/Admin/Home";
+import { Navigate } from "react-router-dom";
 
 const adminRoutes = [
+  { path: "", element: <Navigate to="home" replace /> },
+  { path: "home", element: <Home /> },
   { path: "products", element: <Products /> },
   { path: "products/add", element: <AddProduct /> },
   { path: "products/update/:id", element: <UpdateProduct /> },

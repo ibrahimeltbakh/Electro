@@ -5,9 +5,10 @@ import ProductsTable from "../../../components/Admin/Products/ProductsTable";
 
 export default function Products() {
   const { data, isLoading, isError, error } = useProducts();
+  console.log(data);
 
   if (isError) {
-    <Error error={error} />;
+    return <Error error={error} />;
   }
   if (isLoading) {
     return <Loading />;
@@ -25,7 +26,7 @@ export default function Products() {
         Your Products
       </h1>
 
-      <ProductsTable products={data.products} />
+      <ProductsTable products={data?.products} />
     </div>
   );
 }

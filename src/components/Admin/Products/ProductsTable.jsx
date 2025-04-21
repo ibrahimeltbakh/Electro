@@ -20,9 +20,9 @@ const tableHead = [
   { title: "Actions", key: "actions" },
 ];
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 5;
 
-export default function ProductsTable({ products }) {
+export default function ProductsTable({ products = [] }) {
   console.log(products);
   const [currentPage, setCurrentPage] = useState(1);
 
