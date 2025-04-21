@@ -8,6 +8,7 @@ import CategoriesSlider from '@/components/Sliders/CategoriesSlider'
 import BrandSlider from '@/components/Sliders/BrandSlider'
 import HeroSection from '@/components/Homepage/HeroSection'
 import NewsLetter from '@/components/Homepage/NewsLetter'
+import UserOrder from '@/components/UserOrder'
 export default function Home() {
   return (
     <>
@@ -22,6 +23,7 @@ export default function Home() {
       <CategoriesSlider />
       <RecentProducts numberOfProducts={12} start={8} />
       <RecentProducts numberOfProducts={16} start={12} />
+      <UserOrder />
     </>
   )
 }
