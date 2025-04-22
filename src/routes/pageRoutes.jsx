@@ -10,7 +10,7 @@ import WishList from "@/pages/WishList";
 import Categories from "@/pages/Categories";
 import Brands from "@/pages/Brands";
 import ProductDetails from "@/pages/ProductDetails";
-import BrandsDetails from "@/pages/BrandsDetails";
+import BrandDetail from "@/pages/BrandDetail";
 import Profile from "@/pages/Profile";
 import CategoryDetails from "@/pages/CategoryDetails";
 import { Children } from "react";
@@ -23,10 +23,10 @@ const pageRoutes = [
   { path: "/brands", element: <Brands /> },
   {
     path: "/brands/:id",
-    element: <BrandsDetails />,
+    element: <BrandDetail />,
   },
   {
-    path: "/categories/:id",
+    path: "/category/:id",
     element: <CategoryDetails />,
   },
 
