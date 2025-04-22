@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaFilter, FaSortAmountDown, FaThLarge, FaThList, FaSearch, FaArrowLeft, FaShoppingCart } from 'react-icons/fa';
 import useProducts from '@/Hooks/products/useProducts';
 import useCategories from '@/Hooks/category/usecatergories';
@@ -14,6 +14,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 const CategoryDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  
   const [sortBy, setSortBy] = useState('default');
   const [viewMode, setViewMode] = useState('grid');
   const [showFilters, setShowFilters] = useState(false);
@@ -24,10 +26,19 @@ const CategoryDetails = () => {
   const { data: categoriesData, isLoading: categoriesLoading, isError: categoriesError } = useCategories();
   const { mutate: addToCart } = useAddToCart();
 
-  const currentCategory = categoriesData?.categories?.find(cat => 
-    cat._id === id || cat.name === id
-  );
+  const currentCategory = categoriesData?.categories?.find(cat => cat._id === id);
   
+  useEffect(() => {
+    console.log("Category ID:", id);
+    console.log("Categories data:", categoriesData?.categories);
+    console.log("Current category:", currentCategory);
+    
+    if (!categoriesLoading && !categoriesError && categoriesData?.categories && !currentCategory) {
+      console.log("Category not found, redirecting to categories page");
+      navigate('/categories');
+    }
+  }, [id, categoriesData, categoriesLoading, categoriesError, currentCategory, navigate]);
+
   const filteredProducts = productsData?.products?.filter(product => {
     if (!currentCategory) return false;
     return product.category._id === currentCategory._id;
@@ -56,8 +67,25 @@ const CategoryDetails = () => {
     return <Loading />;
   }
 
-  if (productsError || categoriesError || !currentCategory) {
+  if (productsError || categoriesError) {
     return <Error />;
+  }
+
+  if (!currentCategory) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-8">
+        <div className="max-w-md w-full text-center">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">Category Not Found</h2>
+          <p className="text-gray-600 mb-8">The category you're looking for doesn't exist or has been removed.</p>
+          <Link 
+            to="/categories" 
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Browse All Categories
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const sliderSettings = {

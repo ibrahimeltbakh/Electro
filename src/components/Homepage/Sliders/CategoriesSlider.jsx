@@ -98,7 +98,7 @@ const CategoriesSlider = () => {
           <Slider {...settings}>
             {data?.categories?.map((category) => (
               <div key={category._id} className="p-4">
-                <Link to={`/category/${category.name}`}>
+                <Link to={`/category/${category._id}`}>
                   <motion.div 
                     whileHover={{ y: -10 }}
                     transition={{ duration: 0.3 }}
