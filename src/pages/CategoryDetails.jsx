@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { FaFilter, FaSortAmountDown, FaThLarge, FaThList, FaSearch, FaArrowLeft, FaShoppingCart } from 'react-icons/fa';
 import useProducts from '@/Hooks/products/useProducts';
 import useCategories from '@/Hooks/category/usecatergories';
@@ -14,7 +14,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const CategoryDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   
   const [sortBy, setSortBy] = useState('default');
   const [viewMode, setViewMode] = useState('grid');
@@ -26,19 +25,15 @@ const CategoryDetails = () => {
   const { data: categoriesData, isLoading: categoriesLoading, isError: categoriesError } = useCategories();
   const { mutate: addToCart } = useAddToCart();
 
+  console.log("CategoryDetails - ID:", id);
+  console.log("CategoryDetails - Categories:", categoriesData?.categories);
+
+  // Find the category by ID
   const currentCategory = categoriesData?.categories?.find(cat => cat._id === id);
   
-  useEffect(() => {
-    console.log("Category ID:", id);
-    console.log("Categories data:", categoriesData?.categories);
-    console.log("Current category:", currentCategory);
-    
-    if (!categoriesLoading && !categoriesError && categoriesData?.categories && !currentCategory) {
-      console.log("Category not found, redirecting to categories page");
-      navigate('/categories');
-    }
-  }, [id, categoriesData, categoriesLoading, categoriesError, currentCategory, navigate]);
+  console.log("CategoryDetails - Current Category:", currentCategory);
 
+  // Filter products for this category
   const filteredProducts = productsData?.products?.filter(product => {
     if (!currentCategory) return false;
     return product.category._id === currentCategory._id;
@@ -48,6 +43,7 @@ const CategoryDetails = () => {
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   ) || [];
 
+  // Sort the filtered products
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch(sortBy) {
       case 'price-asc':
@@ -63,31 +59,40 @@ const CategoryDetails = () => {
     }
   });
 
+  // Show loading while data is being fetched
   if (productsLoading || categoriesLoading) {
     return <Loading />;
   }
 
+  // Show error state
   if (productsError || categoriesError) {
     return <Error />;
   }
-
+  
+  // Show not found when category doesn't exist
   if (!currentCategory) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-8">
-        <div className="max-w-md w-full text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Category Not Found</h2>
-          <p className="text-gray-600 mb-8">The category you're looking for doesn't exist or has been removed.</p>
-          <Link 
-            to="/categories" 
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-          >
-            Browse All Categories
-          </Link>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 text-center">
+          <svg className="w-16 h-16 text-red-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Category Not Found</h2>
+          <p className="text-gray-500 mb-6">The category ID "{id}" doesn't exist or has been removed.</p>
+          <div className="flex flex-col space-y-3">
+            <Link to="/categories" className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+              Browse All Categories
+            </Link>
+            <Link to="/" className="w-full py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">
+              Go to Homepage
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 
+  // Slider settings for related products
   const sliderSettings = {
     dots: true,
     infinite: true,

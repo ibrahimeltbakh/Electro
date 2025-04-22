@@ -99,7 +99,7 @@ export default function Categories() {
               whileHover={{ y: -10, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
               className="rounded-xl overflow-hidden relative group h-64"
             >
-              <Link to={`/categories/${category.name}`}>
+              <Link to={`/category/${category._id}`}>
                 <div className={`h-full bg-gradient-to-br ${bgColors[index % bgColors.length]} relative overflow-hidden`}>
                   {/* Category Image */}
                   <div className="absolute inset-0 flex items-center justify-center p-8">
