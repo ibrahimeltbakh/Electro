@@ -199,7 +199,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Products */}
-        <div className=" bg-amber-800    w-full md:w-2/3 lg:w-3/4 mt-6 md:mt-0 md:pl-4">
+        <div className="     w-full md:w-2/3 lg:w-3/4 mt-6 md:mt-0 md:pl-4">
           <div className="w-full">
             {filteredProduct.length > 0 ? (
               <>
