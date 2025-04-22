@@ -11,11 +11,11 @@ import Categories from "@/pages/Categories";
 import Brands from "@/pages/Brands";
 import ProductDetails from "@/pages/ProductDetails";
 import BrandsDetails from "@/pages/BrandsDetails";
-import Profile from "@/pages/Profile";
 import CategoryDetails from "@/pages/CategoryDetails";
-import { Children } from "react";
 import adminRoutes from "./adminRoutes";
+import profileRoutes from "./profileRoutes";
 import CashOrder from "@/pages/CashOrder";
+import Profile from "./../pages/profile/Profile";
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -81,6 +81,7 @@ const pageRoutes = [
         <Profile />
       </ProtectedRoute>
     ),
+    children: profileRoutes,
   },
 ];
 
