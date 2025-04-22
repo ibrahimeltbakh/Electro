@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function BrandsCard({ brand }) {
   return (
-    <Link to={`/brands/${brand.name}`} className="block">
-      <div className="group relative overflow-hidden rounded-xl shadow-md bg-white transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="group relative overflow-hidden rounded-xl shadow-md bg-white transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+      <Link to={`/brands/${brand.name}`} className="block">
         <div className="overflow-hidden">
           <img
             src={brand.image.secure_url}
@@ -18,7 +17,7 @@ export default function BrandsCard({ brand }) {
             {brand.name}
           </h2>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
