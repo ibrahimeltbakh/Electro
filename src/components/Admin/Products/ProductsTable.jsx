@@ -7,8 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import UpdateProductButton from "./../../../components/Admin/Products/UpdateProductButton";
-import RemoveProductButton from "../../../components/Admin/Products/RemoveProductButton";
+import UpdateProductButton from "./UpdateProductButton";
+import RemoveProductButton from "./RemoveProductButton";
 import { Button } from "@/components/ui/button";
 
 const tableHead = [
@@ -20,9 +20,9 @@ const tableHead = [
   { title: "Actions", key: "actions" },
 ];
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 5;
 
-export default function ProductsTable({ products }) {
+export default function ProductsTable({ products = [] }) {
   console.log(products);
   const [currentPage, setCurrentPage] = useState(1);
 

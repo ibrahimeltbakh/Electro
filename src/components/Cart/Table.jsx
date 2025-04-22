@@ -16,8 +16,8 @@ import AddToCartButton from "./Buttons/AddToCartButton";
 const tableHead = [
   { title: "Product Name", key: "name" },
   { title: "Image", key: "image" },
-  { title: "Price", key: "price" },
-  { title: "Discount", key: "discount" },
+  // { title: "Price", key: "price" },
+  // { title: "Discount", key: "discount" },
   { title: "Price After Discount", key: "priceAfterDiscount" },
   { title: "Amount", key: "amount" },
   { title: "Actions", key: "actions" },
@@ -55,16 +55,16 @@ export default function CartTable({ cartProducts, total }) {
                 className="rounded-md mx-auto"
               />
             </TableCell>
-            <TableCell className="px-6 py-3">
-              {product?.productId?.price}
+            {/* <TableCell className="px-6 py-3">
+              {product?.productId?.price} $
             </TableCell>
             <TableCell className="px-6 py-3">
               {product?.productId?.discount <= 1
                 ? `-`
                 : `${product?.productId?.discount}%`}
-            </TableCell>
+            </TableCell> */}
             <TableCell className="px-6 py-3">
-              {product?.productId?.priceAfterDiscount}
+              {product?.productId?.priceAfterDiscount} $
             </TableCell>
             <TableCell className="px-6 py-3">
               <div className="flex gap-2 items-center justify-center ">

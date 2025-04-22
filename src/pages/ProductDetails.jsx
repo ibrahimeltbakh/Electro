@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -27,8 +28,8 @@ export default function ProductDetails() {
   const { product } = data;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br py-8">
+      <div className="container mx-auto px-4 ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -183,6 +184,7 @@ export default function ProductDetails() {
           </div>
         </motion.div>
       </div>
+     
     </div>
-  );
+  )
 }

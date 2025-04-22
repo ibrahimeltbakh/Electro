@@ -17,6 +17,7 @@ import Loading from "@/components/Loading/Loading";
 import Error from "@/components/Error/Error";
 
 export default function UpdateProductForm({ product }) {
+  console.log(product);
   const [title, setTitle] = useState(product?.title || "");
   const [description, setDescription] = useState(product?.description || "");
   const [price, setPrice] = useState(product?.price || "");
@@ -48,6 +49,7 @@ export default function UpdateProductForm({ product }) {
     }
 
     const payload = {
+      productId: product?._id || product?.id,
       title,
       description,
       price,
@@ -151,6 +153,13 @@ export default function UpdateProductForm({ product }) {
           className="bg-input text-foreground file:text-muted-foreground"
         />
       </div>
+      <div className="flex items-center justify-center  gap-2">
+        <img
+          src={product?.imageCover?.secure_url}
+          alt={product?.title}
+          className="w-40 h-40  border-2 border-blue-500 overflow-hidden shadow-md"
+        />
+      </div>
 
       <div>
         <Label>Additional Images (optional)</Label>
@@ -161,6 +170,15 @@ export default function UpdateProductForm({ product }) {
           onChange={(e) => setImages(e.target.files)}
           className="bg-input text-foreground file:text-muted-foreground"
         />
+      </div>
+      <div className="flex items-center justify-center  gap-2">
+        {product?.images?.map((image) => (
+          <img
+            src={image.secure_url}
+            alt={product?.title}
+            className="w-30 h-30  border-2 border-blue-500 overflow-hidden shadow-md"
+          />
+        ))}
       </div>
 
       <Button

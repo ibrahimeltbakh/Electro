@@ -9,6 +9,7 @@ export const addCategory = async ({ name, image }) => {
     formData.append("name", name);
     formData.append("image", image);
 
+
     const response = await api.post("/categories", formData, {
         headers: { token: getToken() },
     });
@@ -19,7 +20,8 @@ export const addCategory = async ({ name, image }) => {
 export const updateCategory = async ({ categoryId, name, image }) => {
     const formData = new FormData();
     formData.append("name", name);
-    if (image) formData.append("image", image); // optional
+    if (image) formData.append("image", image);
+
 
     const response = await api.put(`/categories/${categoryId}`, formData, {
         headers: { token: getToken() },
