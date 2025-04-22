@@ -1,105 +1,168 @@
-// import React from 'react'
-// import hero from "../../assets/Images/WhatsApp Image 2025-04-16 at 23.56.16_c2559278.jpg"
-// export default function HeroSection() {
-//     return (
-//         <div className='relative '>
-//             <img
-//                 src={hero} alt="hero" className=' w-full h-full object-cover' />
-//             <div className='absolute top-20 left-0 w-full h-full'>
-
-//                     <div className=" p-8 rounded-lg  max-w-md w-70">
-//                         <div className="bg-blue-500 text-center text-white p-2 rounded mb-6">
-//                             <h2 className="text-xl font-bold">Special Offer</h2>
-//                         </div>
-//                         <div className=" space-y-4">
-//                             <h3 className="text-2xl font-bold">On Mobile Phones</h3>
-//                             <p className="">Sale Up To 30% Off</p>
-//                             <p className="text-xl font-bold">Start From $140.05</p>
-//                             <div className="mt-6">
-//                                 <button className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white-600 transition duration-300">
-//                                     Shop Now
-//                                 </button>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-
-       
-
-
-
-
-
-//     )
-// }
-
-
-
-// import React from 'react';
-// import hero from "../../assets/Images/WhatsApp Image 2025-04-16 at 23.56.16_c2559278.jpg";
-
-// export default function HeroSection() {
-//   return (
-//     <div className="relative w-full h-full">
-//       <img src={hero} alt="hero" className="w-full   object-cover" />
-      
-//       <div className="absolute inset-0 bg-black-20 bg-opacity-30 flex items-center justify-start px-8 md:px-16">
-//         <div className="text-white max-w-lg space-y-6">
-//           <div className="bg-blue-500 text-center text-white px-4 py-2 rounded-md w-max">
-//             <h2 className="text-lg md:text-xl font-bold">Special Offer</h2>
-//           </div>
-//           <div className="space-y-2">
-//             <h3 className="text-2xl md:text-4xl font-extrabold">On Mobile Phones</h3>
-//             <p className="text-sm md:text-base">Sale Up To 30% Off</p>
-//             <p className="text-lg md:text-2xl font-bold">Start From $140.05</p>
-//           </div>
-//           <button className="bg-blue-500 hover:bg-blue-600 transition text-white px-6 py-2 rounded-full">
-//             Shop Now
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import hero from "../../assets/Images/WhatsApp Image 2025-04-16 at 23.56.16_c2559278.jpg";
+import headphonesImg from "../../assets/Images/hero-headphones.png"; // Assuming you have this image
 
-export default function HeroSection() {
+const HeroSection = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const heroRef = useRef(null);
+  
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }
+    };
+    
+    const hero = heroRef.current;
+    if (hero) {
+      hero.addEventListener('mousemove', handleMouseMove);
+      return () => {
+        hero.removeEventListener('mousemove', handleMouseMove);
+      };
+    }
+  }, []);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden object-cover">
-      {/* الخلفية */}
-      <img src={hero} alt="hero" className="w-full h-full object-cover" />
-
-      {/* التعتيم + النص */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-6 md:px-20">
-        <div className="text-white max-w-xl animate-fade-in-up space-y-6">
-          {/* العرض الخاص */}
-          <div className="bg-blue-600 text-center px-4 py-2 rounded-md shadow-lg w-max animate-bounce-slow">
-            <h2 className="text-lg md:text-xl font-bold uppercase tracking-wide">Special Offer</h2>
-          </div>
-
-          {/* التفاصيل */}
-          <div className="space-y-3">
-            <h3 className="text-3xl md:text-5xl font-extrabold leading-tight drop-shadow-md">
-              On Mobile Phones
-            </h3>
-            <p className="text-sm md:text-lg opacity-90">Sale Up To <span className="text-yellow-400 font-semibold">30% Off</span></p>
-            <p className="text-xl md:text-2xl font-bold">Start From <span className="text-green-400">$140.05</span></p>
-          </div>
-
-          {/* زر الشراء */}
-          <button className="mt-4 bg-blue-500 hover:bg-blue-600 transition duration-300 text-white px-6 py-2 rounded-full shadow-lg hover:scale-105">
-            Shop Now
-          </button>
+    <div 
+      ref={heroRef}
+      className="relative w-full h-[600px] overflow-hidden bg-gradient-to-r from-blue-950 to-indigo-900"
+    >
+      {/* Circular gradient follows mouse */}
+      <motion.div
+        className="absolute opacity-40 rounded-full w-96 h-96 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 blur-xl"
+        animate={{
+          x: mousePosition.x - 150,
+          y: mousePosition.y - 150,
+        }}
+        transition={{ type: "spring", damping: 15, stiffness: 150 }}
+      />
+      
+      {/* Content */}
+      <div className="container mx-auto h-full relative z-10 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-full items-center">
+          {/* Text Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-white space-y-6"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                <span className="text-blue-400">Get Best Device</span>
+                <br />
+                With Lowest Price
+              </h1>
+            </motion.div>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+              className="text-sm md:text-base max-w-md opacity-90"
+            >
+              Find a lineup of quality computers designed, developed and maintained 
+              by Electro Inc, added to the fact that they are created operating 
+              at world-class standards.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.7 }}
+            >
+              <Link to="/shop">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-blue-500 hover:bg-blue-600 transition-all duration-300 text-white px-8 py-3 rounded-full font-medium"
+                >
+                  Explore Now
+                </motion.button>
+              </Link>
+            </motion.div>
+          </motion.div>
+          
+          {/* Product Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="hidden md:flex justify-center items-center"
+          >
+            <motion.div
+              animate={{
+                y: [0, -15, 0],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+              }}
+              className="relative"
+            >
+              {/* Circular glow behind product */}
+              <div className="absolute -inset-6 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full opacity-30 blur-xl" />
+              
+              {/* Product badge */}
+              <motion.div 
+                className="absolute top-0 right-0 bg-blue-500 text-white text-xs px-3 py-1 rounded-full z-20"
+                animate={{
+                  rotate: [0, 5, 0, -5, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                New Release
+              </motion.div>
+              
+              {/* Main product image - replace with a headphones image that has transparency */}
+              <img 
+                src={headphonesImg} 
+                alt="Premium Headphones" 
+                className="relative z-10 w-80 h-80 object-contain" 
+              />
+              
+              {/* Feature badges */}
+              <motion.div 
+                className="absolute -left-20 top-1/3 bg-white bg-opacity-90 backdrop-blur-sm text-blue-900 p-2 rounded-lg shadow-lg text-sm font-medium"
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.8 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                Premium Sound
+              </motion.div>
+              
+              <motion.div 
+                className="absolute -right-10 bottom-1/4 bg-white bg-opacity-90 backdrop-blur-sm text-blue-900 p-2 rounded-lg shadow-lg text-sm font-medium"
+                initial={{ x: 50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                Noise Cancellation
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default HeroSection;
