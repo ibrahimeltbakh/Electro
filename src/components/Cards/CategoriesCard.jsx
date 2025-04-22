@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function CategoriesCard({ category }) {
     return (
-        <Link to={`/categories/${category.name}`} className="block">
+        <Link to={`/category/${category.name}`} className="block">
             <div className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
                 <div className="aspect-w-16 aspect-h-9 w-full">
                     <img
