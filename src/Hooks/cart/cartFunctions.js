@@ -1,4 +1,5 @@
 import api from "@/lib/axios";
+import toast from "react-hot-toast";
 
 const getToken = () => {
     return (
@@ -14,11 +15,16 @@ export const GetCartProducts = async () => {
 };
 
 export const addtoCart = async (productId) => {
+    const token = getToken();
+    if (!token) {
+        toast.error("You must be logged in.");
+        return;
+    }
     const response = await api.post(
         "/cart",
         { productId },
         {
-            headers: { token: getToken() },
+            headers: { token },
         }
     );
     return response.data;
