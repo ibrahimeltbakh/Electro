@@ -3,16 +3,18 @@ import NavBar from "../components/navbar/NavBar";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 import NewsLetter from "../components/Homepage/NewsLetter";
+import ScrollToTop from "@/components/Homepage/ScrollToTop";
+
 export default function Layout() {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <NavBar />
-      <div className="min-h-screen">
+      <main className="flex-grow">
         <Outlet />
-      </div>
-    {/* <NewsLetter /> */}
-
-      {/* <Footer /> */}
+      </main>
+      <NewsLetter />
+      <Footer />
+      <ScrollToTop />
     </div>
   );
 }
