@@ -5,6 +5,7 @@ import { GetSpacificProduct } from "@/Hooks/products/productFunction";
 import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
 import useAddToCart from "@/Hooks/cart/useAddToCart";
 import useAddToWishlist from "@/Hooks/wishList/useAddToWishlist";
+import { motion } from 'framer-motion';
 
 export default function ProductDetails() {
   const { mutate } = useAddToCart();
