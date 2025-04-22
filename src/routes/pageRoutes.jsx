@@ -17,6 +17,10 @@ import adminRoutes from "./adminRoutes";
 import profileRoutes from "./profileRoutes";
 import CashOrder from "@/pages/CashOrder";
 import Profile from "@/pages/profile/Profile";
+import LoginPage from "@/pages/Login";
+import NotFound from "@/pages/NotFound";
+import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
+
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -27,10 +31,13 @@ const pageRoutes = [
     element: <BrandDetail />,
   },
   {
+    path: "/category",
+    element: <Categories />,
+  },
+  {
     path: "/category/:id",
     element: <CategoryDetails />,
   },
-
   {
     path: "/cart",
     element: (
@@ -63,7 +70,7 @@ const pageRoutes = [
       </ProtectedRoute>
     ),
   },
-  { path: "/login", element: <Login /> },
+  { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
   { path: "/reset-password", element: <ResetPassword /> },
   {
@@ -84,6 +91,7 @@ const pageRoutes = [
     ),
     children: profileRoutes,
   },
+  { path: "*", element: <NotFound /> },
 ];
 
 export default pageRoutes;
