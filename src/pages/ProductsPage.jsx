@@ -11,6 +11,7 @@ import useAddToCart from "@/Hooks/cart/useAddToCart";
 import useAddToWishlist from "@/Hooks/wishList/useAddToWishlist";
 import useRemoveFromWishlist from "@/Hooks/wishList/useRemoveFromWishlist";
 import useGetWishList from "@/Hooks/wishList/useGetWishList";
+import CartToggleButton from "@/components/Cart/Buttons/CartToggleButton";
 
 export default function ProductsPage() {
   // Filter states
@@ -496,14 +497,11 @@ export default function ProductsPage() {
                                 </div>
                               </div>
                               
-                              <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => addToCart({ productId: product._id })}
-                                className="p-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md hover:shadow-blue-200 transition-all"
-                              >
-                                <FaShoppingCart className="text-lg" />
-                              </motion.button>
+                              <CartToggleButton 
+                                productId={product._id} 
+                                iconOnly={true}
+                                quantity={product.quantity}
+                              />
                             </div>
                           </div>
                         </motion.div>
@@ -554,29 +552,12 @@ export default function ProductsPage() {
                               </div>
                               
                               <div className="flex gap-2">
-                                <motion.button
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  onClick={() => handleWishlistToggle(product._id)}
-                                  className={`p-2 rounded-full transition-colors ${
-                                    productsInWishlist[product._id] 
-                                      ? "bg-red-50 dark:bg-red-900/20 text-red-500" 
-                                      : "bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-red-500"
-                                  }`}
-                                  aria-label="Add to wishlist"
-                                >
-                                  {productsInWishlist[product._id] ? <FaHeart /> : <FaRegHeart />}
-                                </motion.button>
-                                
-                                <motion.button
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  onClick={() => addToCart({ productId: product._id })}
-                                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md transition-colors flex items-center gap-2"
-                                >
-                                  <FaShoppingCart />
-                                  <span>Add to Cart</span>
-                                </motion.button>
+                                <CartToggleButton 
+                                  productId={product._id} 
+                                  iconOnly={false}
+                                  quantity={product.quantity}
+                                  className="px-4 py-2 text-sm"
+                                />
                               </div>
                             </div>
                           </div>
