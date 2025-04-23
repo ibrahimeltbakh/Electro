@@ -1,180 +1,188 @@
-import React, { useState, useContext } from "react";
+// Navbar.jsx
+
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ModeToggle } from "../theme/Mode-toggle";
-import { AuthContext } from "@/context/AuthContext/AuthContext";
-import { 
-  FaUser, 
-  FaSignInAlt, 
-  FaUserPlus, 
-  FaSignOutAlt, 
-  FaUserCircle 
+import {
+  FaUser,
+  FaSignInAlt,
+  FaUserPlus,
+  FaSignOutAlt,
+  FaUserCircle,
+  FaBars,
 } from "react-icons/fa";
+import { AuthContext } from "@/context/AuthContext/AuthContext";
+import { ModeToggle } from "../theme/Mode-toggle";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function NavBar() {
   const { user, logout } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const dropdownRef = useRef();
+
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/shop", label: "Shop" },
+    { path: "/cart", label: "Cart" },
+    { path: "/wishlist", label: "Wishlist" },
+    { path: "/admin", label: "Dashboard" },
+    { path: "/categories", label: "Categories" },
+    { path: "/brands", label: "Brands" },
+  ];
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <NavLink to="/" className="flex items-center justify-center">
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Electro
-            </span>
-          </NavLink>
+    <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-md sticky top-0 z-50">
+      <div className="max-w-screen-xl mx-auto px-4 py-3 flex justify-between items-center">
+        {/* Logo */}
+        <NavLink
+          to="/"
+          className="text-2xl font-bold text-blue-600 dark:text-white"
+        >
+          Electro
+        </NavLink>
 
-          <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto "
-            id="navbar-language"
-          >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li>
-                <NavLink
-                  to="/"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                  aria-current="page"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/shop"
-                  className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Shop
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/cart"
-                  className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Cart
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/wishlist"
-                  className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Wishlist
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/admin"
-                  className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Dashboard
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/categories"
-                  className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Categories
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/brands"
-                  className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Brands
-                </NavLink>
-              </li>
-            </ul>
-          </div>
+        {/* Hamburger */}
+        <button
+          className="md:hidden text-gray-700 dark:text-white"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <FaBars size={22} />
+        </button>
 
-          <div className="flex items-center gap-4">
-            <ModeToggle />
+        {/* Links Desktop */}
+        <ul className="hidden md:flex space-x-6 font-medium text-sm text-gray-700 dark:text-gray-200">
+          {navLinks.map((link) => (
+            <li key={link.path}>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-blue-600 dark:text-blue-400 underline underline-offset-4"
+                    : "hover:text-blue-500 dark:hover:text-blue-300 transition"
+                }
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-          <div className="relative">
-  <button
-    onClick={() => setDropdownOpen(!dropdownOpen)}
-    className="flex items-center gap-2 px-4 py-2  dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-sm hover:shadow-md transition-all duration-300"
-  >
-    <div className="flex items-center gap-2">
-      <div className="bg-blue-100 p-2 rounded-full">
-        <FaUser className="text-blue-600 text-lg" />
-      </div>
-      <span className="text-gray-800 dark:text-gray-200 font-medium">
-        {user ? user.name : "Guest"}
-      </span>
-    </div>
-    <svg
-      className={`w-4 h-4 ml-2 text-gray-500 dark:text-gray-300 transition-transform duration-300 ${
-        dropdownOpen ? 'rotate-180' : ''
-      }`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
+        {/* Right actions */}
+        <div className="flex items-center gap-4 relative">
+          <ModeToggle />
 
-  {dropdownOpen && (
-    <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden">
-      {!user ? (
-        <>
-          <NavLink
-            to="/login"
-            className="flex items-center gap-3 px-5 py-3 text-gray-800 dark:text-gray-100 hover:bg-blue-50 dark:hover:bg-gray-700 transition"
-            onClick={() => setDropdownOpen(false)}
-          >
-            <FaSignInAlt className="text-blue-600 dark:text-blue-400" />
-            <span>Login</span>
-          </NavLink>
-          <NavLink
-            to="/register"
-            className="flex items-center gap-3 px-5 py-3 text-gray-800 dark:text-gray-100 hover:bg-blue-50 dark:hover:bg-gray-700 transition"
-            onClick={() => setDropdownOpen(false)}
-          >
-            <FaUserPlus className="text-blue-600 dark:text-blue-400" />
-            <span>Register</span>
-          </NavLink>
-        </>
-      ) : (
-        <>
-          <button
-            onClick={() => {
-              navigate("/profile");
-              setDropdownOpen(false);
-            }}
-            className="flex items-center gap-3 w-full px-5 py-3 text-gray-800 dark:text-gray-100 hover:bg-blue-50 dark:hover:bg-gray-700 transition"
-          >
-            <FaUserCircle className="text-blue-600 dark:text-blue-400" />
-            <span>Profile</span>
-          </button>
-          <div className="border-t border-gray-100 dark:border-gray-700" />
-          <button
-            onClick={() => {
-              logout();
-              setDropdownOpen(false);
-            }}
-            className="flex items-center gap-3 w-full px-5 py-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition"
-          >
-            <FaSignOutAlt />
-            <span>Logout</span>
-          </button>
-        </>
-      )}
-    </div>
-  )}
-</div>
+          {/* Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md hover:shadow-md transition text-sm text-gray-800 dark:text-gray-100"
+            >
+              <FaUser />
+              {user ? user.name : "Guest"}
+            </button>
 
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 overflow-hidden"
+                >
+                  {!user ? (
+                    <>
+                      <NavLink
+                        to="/login"
+                        onClick={() => setDropdownOpen(false)}
+                        className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
+                      >
+                        <FaSignInAlt className="inline mr-2" />
+                        Login
+                      </NavLink>
+                      <NavLink
+                        to="/register"
+                        onClick={() => setDropdownOpen(false)}
+                        className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
+                      >
+                        <FaUserPlus className="inline mr-2" />
+                        Register
+                      </NavLink>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          navigate("/profile");
+                          setDropdownOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm"
+                      >
+                        <FaUserCircle className="inline mr-2" />
+                        Profile
+                      </button>
+                      <div className="border-t border-gray-200 dark:border-gray-600" />
+                      <button
+                        onClick={() => {
+                          logout();
+                          setDropdownOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-sm"
+                      >
+                        <FaSignOutAlt className="inline mr-2" />
+                        Logout
+                      </button>
+                    </>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
-      </nav>
-    </>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden px-4 pb-4"
+          >
+            <ul className="flex flex-col space-y-2 font-medium text-sm text-gray-700 dark:text-gray-200">
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <NavLink
+                    to={link.path}
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400 underline"
+                        : "hover:text-blue-500 dark:hover:text-blue-300 transition"
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 }
