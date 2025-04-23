@@ -138,7 +138,7 @@ const UserAccount = () => {
 
   return (
     <>
-      <div className="bg-white p-6 rounded-xl shadow-md space-y-6">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md space-y-6">
         <ProfileHeader
           user={user}
           profileImage={profileImage}
@@ -159,7 +159,7 @@ const UserAccount = () => {
           />
         )}
       </div>
-      <div className="bg-white p-6 rounded-xl shadow-md">
+      <div className="bg-white p-6 rounded-xl shadow-md dark:bg-gray-800 mt-6">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
           Change Password
         </h2>

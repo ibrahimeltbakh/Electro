@@ -1,11 +1,13 @@
 import React from "react";
-import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
+import CartToggleButton from "@/components/Cart/Buttons/CartToggleButton";
+import WishlistHeartButton from "@/components/WishList/WishlistHeartButton";
 
 export default function ProductInfo({ product, mutate, mutation }) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
           {product.title}
         </h1>
         <div className="flex items-center space-x-2">
@@ -21,13 +23,13 @@ export default function ProductInfo({ product, mutate, mutation }) {
               />
             ))}
           </div>
-          <span className="text-gray-600">({product.rateNum} reviews)</span>
+          <span className="text-gray-600 dark:text-gray-400">({product.rateNum} reviews)</span>
         </div>
       </div>
 
       <div className="space-y-4">
         <div className="flex items-baseline space-x-4">
-          <span className="text-3xl font-bold text-blue-600">
+          <span className="text-3xl font-bold text-blue-600 dark:text-blue-400">
             ${product?.priceAfterDiscount}
           </span>
           {product.discount > 1 && (
@@ -37,45 +39,43 @@ export default function ProductInfo({ product, mutate, mutation }) {
           )}
         </div>
 
-        <p className="text-gray-600 leading-relaxed">{product?.description}</p>
+        <p className="text-gray-600 leading-relaxed dark:text-gray-300">{product?.description}</p>
 
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
-            <span className="text-gray-600">Brand:</span>
-            <span className="font-semibold capitalize text-blue-600">
+            <span className="text-gray-600 dark:text-gray-400">Brand:</span>
+            <span className="font-semibold capitalize text-blue-600 dark:text-blue-400">
               {product?.brand?.name}
             </span>
           </div>
           <div className="flex items-center space-x-2">
-            <span className="text-gray-600">Category:</span>
-            <span className="font-semibold capitalize text-blue-600">
+            <span className="text-gray-600 dark:text-gray-400">Category:</span>
+            <span className="font-semibold capitalize text-blue-600 dark:text-blue-400">
               {product?.category?.name}
             </span>
           </div>
         </div>
 
         <div className="flex items-center space-x-2">
-          <span className="text-gray-600">Stock:</span>
+          <span className="text-gray-600 dark:text-gray-400">Stock:</span>
           <span
             className={`font-semibold ${
-              product.stock > 0 ? "text-green-600" : "text-red-600"
+              product.stock > 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
             }`}>
             {product?.stock} units
           </span>
         </div>
 
         <div className="flex space-x-4">
-          <button
-            onClick={() => mutate({ productId: product._id })}
-            className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
-            <FaShoppingCart />
-            <span>Add to Cart</span>
-          </button>
-          <button
-            onClick={() => mutation?.mutate({ productId: product._id })}
-            className="p-3 border-2 border-gray-200 rounded-lg hover:border-red-500 hover:text-red-500 transition-colors">
-            <FaHeart />
-          </button>
+          <CartToggleButton 
+            productId={product._id} 
+            quantity={product.stock} 
+            className="flex-1"
+          />
+          <WishlistHeartButton 
+            productId={product._id} 
+            className="p-3 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-red-500 w-14 h-14"
+          />
         </div>
       </div>
     </div>

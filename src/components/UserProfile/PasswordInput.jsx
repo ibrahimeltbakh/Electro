@@ -13,14 +13,14 @@ const PasswordInput = ({ icon: Icon, placeholder, error, register, name }) => {
         type={showPassword ? 'text' : 'password'}
         placeholder={placeholder}
         {...register(name)}
-        className={`pl-10 pr-10 dark:text-black py-2 w-full rounded-lg shadow-sm border ${
+        className={`pl-10 pr-10 dark:text-white py-2 w-full rounded-lg shadow-sm border ${
           error ? 'border-red-500' : 'border-gray-300'
         } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300`}
       />
       <button
         type="button"
         onClick={() => setShowPassword(!showPassword)}
-        className="absolute dark:text-black right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+        className="absolute dark:text-white right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
       >
         {showPassword ? <FaEyeSlash /> : <FaEye />}
       </button>

@@ -6,7 +6,7 @@ const ProfileHeader = ({ user, profileImage, fileInputRef, handleImageUpload, se
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-6">
         <div className="relative">
-          <div className="w-20 h-20 rounded-full border-4 border-blue-500 overflow-hidden shadow-md">
+          <div className="w-20 h-20  rounded-full border-4 border-blue-500 overflow-hidden shadow-md">
             {profileImage ? (
               <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
             ) : (
@@ -28,16 +28,16 @@ const ProfileHeader = ({ user, profileImage, fileInputRef, handleImageUpload, se
           <h1 className="font-bold text-xl text-sky-500 my-3 border border-b-2 border-sky-600 border-t-0 border-x-0">
             Account Information
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-white">
             <span className="font-bold text-lg">Name: </span> {user.name}
           </p>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-white">
             <span className="font-bold text-lg">Email: </span> {user.email}
           </p>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-white">
             <span className="font-bold text-lg">Phone: </span> {user.phone}
           </p>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-white">
             <span className="font-bold text-lg">Address: </span> {user.address}
           </p>
         </div>

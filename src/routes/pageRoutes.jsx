@@ -10,12 +10,19 @@ import WishList from "@/pages/WishList";
 import Categories from "@/pages/Categories";
 import Brands from "@/pages/Brands";
 import ProductDetails from "@/pages/ProductDetails";
+import BrandDetail from "@/pages/BrandDetail";
 import BrandsDetails from "@/pages/BrandsDetails";
 import CategoryDetails from "@/pages/CategoryDetails";
 import adminRoutes from "./adminRoutes";
 import profileRoutes from "./profileRoutes";
 import CashOrder from "@/pages/CashOrder";
-import Profile from "./../pages/profile/Profile";
+import Profile from "@/pages/profile/Profile";
+import LoginPage from "@/pages/Login";
+import NotFound from "@/pages/NotFound";
+import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
+import Support from "@/pages/Support";
+import Help from "@/pages/Help";
+
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
@@ -23,13 +30,24 @@ const pageRoutes = [
   { path: "/brands", element: <Brands /> },
   {
     path: "/brands/:id",
-    element: <BrandsDetails />,
+    element: <BrandDetail />,
   },
   {
-    path: "/categories/:id",
+    path: "/category",
+    element: <Categories />,
+  },
+  {
+    path: "/category/:id",
     element: <CategoryDetails />,
   },
-
+  {
+    path: "/contact",
+    element: <Support />,
+  },
+  {
+    path: "/help",
+    element: <Help />,
+  },
   {
     path: "/cart",
     element: (
@@ -62,7 +80,7 @@ const pageRoutes = [
       </ProtectedRoute>
     ),
   },
-  { path: "/login", element: <Login /> },
+  { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
   { path: "/reset-password", element: <ResetPassword /> },
   {
@@ -83,6 +101,7 @@ const pageRoutes = [
     ),
     children: profileRoutes,
   },
+  { path: "*", element: <NotFound /> },
 ];
 
 export default pageRoutes;
