@@ -50,7 +50,6 @@ export default function ProductsPage() {
     }
   }, [wishlistData]);
 
-  // Apply sort and filters when any filter changes
   useEffect(() => {
     if (productsData?.products && isFilterApplied) {
       applyFilters();
@@ -113,19 +112,16 @@ export default function ProductsPage() {
       );
     }
     
-    // Filter by categories
     if (selectedCategories.length > 0) {
       filtered = filtered.filter(product => 
         selectedCategories.includes(product.category.name)
       );
     }
     
-    // Filter by price range
     filtered = filtered.filter(product => 
       product.price >= priceRange[0] && product.price <= priceRange[1]
     );
     
-    // Sort products
     if (sortBy !== "featured") {
       filtered = [...filtered].sort((a, b) => {
         switch (sortBy) {
@@ -148,7 +144,6 @@ export default function ProductsPage() {
     setMobileFiltersOpen(false);
   };
 
-  // Clear all filters
   const clearFilters = () => {
     setSelectedBrands([]);
     setSelectedCategories([]);
@@ -159,26 +154,22 @@ export default function ProductsPage() {
     setIsFilterApplied(false);
   };
 
-  // Handle search form submission
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     applyFilters();
   };
 
-  // Get current products for pagination
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
   const currentProducts = isFilterApplied 
     ? filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
     : productsData?.products?.slice(indexOfFirstProduct, indexOfLastProduct) || [];
   
-  // Calculate total pages
   const totalProducts = isFilterApplied 
     ? filteredProducts.length 
     : productsData?.products?.length || 0;
   const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
-  // Change page
   const paginate = (pageNumber) => {
     if (pageNumber > 0 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
@@ -188,7 +179,6 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Hero section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 py-16">
         <div className="container mx-auto px-4">
           <motion.div 
@@ -222,7 +212,6 @@ export default function ProductsPage() {
       </div>
       
       <div className="container mx-auto px-4 py-8">
-        {/* Filter controls - desktop and mobile */}
         <div className="flex flex-wrap items-center justify-between mb-6 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md">
           <div className="flex items-center gap-4">
             <button
@@ -257,7 +246,6 @@ export default function ProductsPage() {
                 onChange={(e) => {
                   setSortBy(e.target.value);
                   if (isFilterApplied) {
-                    // Re-apply filters with new sort
                     applyFilters();
                   }
                 }}
@@ -283,9 +271,7 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {/* Main content with sidebar and products */}
         <div className="flex flex-wrap -mx-4">
-          {/* Sidebar filters - desktop */}
           <div className={`fixed inset-0 z-50 transform ${mobileFiltersOpen ? 'translate-x-0' : '-translate-x-full'} lg:static lg:z-0 lg:translate-x-0 lg:w-1/4 px-4 transition-transform duration-300 ease-in-out`}>
             <div className="h-full lg:h-auto overflow-y-auto bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg lg:shadow-md">
               <div className="flex justify-between items-center mb-6 lg:mb-4">
@@ -298,7 +284,6 @@ export default function ProductsPage() {
                 </button>
               </div>
               
-              {/* Categories filter */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
                   Categories
@@ -318,7 +303,6 @@ export default function ProductsPage() {
                 </div>
               </div>
               
-              {/* Brands filter */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
                   Brands
@@ -338,7 +322,6 @@ export default function ProductsPage() {
                 </div>
               </div>
               
-              {/* Price range filter */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
                   Price Range
@@ -362,7 +345,6 @@ export default function ProductsPage() {
                 </div>
               </div>
               
-              {/* Filter buttons */}
               <div className="flex flex-col gap-3">
                 <button
                   onClick={applyFilters}
@@ -380,7 +362,6 @@ export default function ProductsPage() {
             </div>
           </div>
           
-          {/* Overlay for mobile filters */}
           {mobileFiltersOpen && (
             <div 
               className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
@@ -388,16 +369,13 @@ export default function ProductsPage() {
             ></div>
           )}
           
-          {/* Products grid */}
           <div className="w-full lg:w-3/4 px-4">
-            {/* Product count and status */}
             <div className="mb-6">
               <p className="text-gray-600 dark:text-gray-400">
                 Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, totalProducts)} of {totalProducts} products
               </p>
             </div>
             
-            {/* No products message */}
             {currentProducts.length === 0 ? (
               <div className="bg-white dark:bg-gray-800 rounded-xl p-12 text-center shadow-md">
                 <svg className="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -414,7 +392,6 @@ export default function ProductsPage() {
               </div>
             ) : (
               <>
-                {/* Products grid/list view */}
                 <div className={viewMode === "grid" 
                   ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" 
                   : "space-y-6"
@@ -496,7 +473,7 @@ export default function ProductsPage() {
                             </div>
                             
                             <Link to={`/product/${product._id}`} className="group">
-                              <h2 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                              <h2 className="text-lg font-bold text-gray-800 mb-2 dark:text-gray-400 line-clamp-2 group-hover:text-blue-600 transition-colors">
                                 {product.title}
                               </h2>
                             </Link>
@@ -541,7 +518,6 @@ export default function ProductsPage() {
                               />
                             </div>
                             
-                            {/* Sale badge */}
                             {product.discount > 0 && (
                               <div className="absolute top-2 left-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                                 -{product.discount}% OFF
@@ -610,7 +586,6 @@ export default function ProductsPage() {
                   ))}
                 </div>
                 
-                {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="mt-10 flex justify-center">
                     <nav className="flex items-center space-x-2">
