@@ -37,12 +37,12 @@ export default function ProductInfo({ product, mutate, mutation }) {
           )}
         </div>
 
-        <p className="text-gray-600 leading-relaxed">{product?.description}</p>
+        <p className="text-gray-600 leading-relaxed dark:text-white">{product?.description}</p>
 
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <span className="text-gray-600">Brand:</span>
-            <span className="font-semibold capitalize text-blue-600">
+            <span className="font-semibold  capitalize text-blue-600">
               {product?.brand?.name}
             </span>
           </div>

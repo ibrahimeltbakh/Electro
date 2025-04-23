@@ -36,7 +36,7 @@ export default function ProductCard({ product }) {
         <motion.div 
             whileHover={{ y: -8 }}
             transition={{ duration: 0.3 }}
-            className="relative group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+            className="relative group bg-white rounded-xl dark:bg-gray-800 dark:shadow-red-900 my-3 overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
         >
             <div className="absolute top-3 right-3 z-30">
                 <motion.button 

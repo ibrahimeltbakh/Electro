@@ -33,12 +33,13 @@ export default function ProductDetails() {
   const { product } = data;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br py-8">
-      <div className="container mx-auto px-4 ">
+    <div className="min-h-screen bg-gradient-to-br py-8 ">
+      <div className="container mx-auto px-4">
         <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          className="bg-white rounded-2xl shadow-xl overflow-hidden dark:bg-gray-800 dark:shadow-gray-700 *:hover:shadow-lg transition-shadow duration-300 ease-in-out"
+          whileHover={{ scale: 1.02 }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
             {/* Product Gallery Section */}
             <ProductGallery
