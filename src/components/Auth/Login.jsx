@@ -75,13 +75,13 @@ const Login = () => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   return (
-    <div className="min-h-screen flex">
-      <div className="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-sky-100 to-blue-50 p-8">
+    <div className="min-h-screen flex dark:bg-gray-800">
+      <div className="w-full md:w-1/2 flex items-center dark:bg-gradient-to-br dark:from-gray-600 dark:to-gray-800 justify-center bg-gradient-to-br from-sky-100 to-blue-50 p-8">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={formAnimation}
-          className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6"
+          className="w-full max-w-md bg-white dark:bg-gradient-to-b dark:from-slate-700 to-slate-900 p-8 rounded-xl shadow-lg space-y-6"
         >
           <motion.div variants={inputAnimation} className="text-center space-y-2">
             <motion.h2 
@@ -104,9 +104,9 @@ const Login = () => {
 
           <motion.div
             variants={inputAnimation}
-            className="py-3 px-4 bg-blue-50 rounded-lg border border-blue-100"
+            className="py-3 px-4 bg-blue-50 rounded-lg border border-blue-100 dark:bg-gray-800"
           >
-            <p className="text-sm text-blue-600 flex items-center">
+            <p className="text-sm text-blue-600 flex items-center dark:text-blue-400">
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path>
               </svg>
@@ -122,7 +122,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email Address"
-                className={`w-full dark:text-black pl-10 pr-4 py-3 border ${
+                className={`w-full dark:text-white placeholder:text-gray-400 pl-10 pr-4 py-3 border ${
                   errors.email ? 'border-red-500' : 'border-gray-300'
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300`}
                 {...register('email', {
@@ -148,8 +148,8 @@ const Login = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                className={`w-full pl-10 dark:text-black pr-10 py-3 border ${
-                  errors.password ? 'border-red-500' : 'border-gray-300'
+                className={`w-full pl-10 pr-10 py-3 border dark:text-white placeholder:text-gray-400 ${
+                  errors.password ? 'border-red-500' : 'border-gray-300 '
                 } rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300`}
                 {...register('password', {
                   required: 'Password is required',

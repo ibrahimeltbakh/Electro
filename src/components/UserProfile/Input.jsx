@@ -10,7 +10,7 @@ const Input = ({ icon: Icon, type = 'text', placeholder, error, register, name }
         type={type}
         placeholder={placeholder}
         {...register(name)}
-        className={`pl-10 pr-4 dark:text-black py-2 w-full rounded-lg shadow-sm border ${
+        className={`pl-10 pr-4 dark:text-white py-2 w-full rounded-lg shadow-sm border ${
           error ? 'border-red-500' : 'border-gray-300'
         } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300`}
       />
