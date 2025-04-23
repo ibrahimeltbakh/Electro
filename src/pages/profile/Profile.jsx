@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "@/components/UserProfile/Sidebar";
@@ -9,7 +9,8 @@ import {
   FaRegQuestionCircle, 
   FaHeadset, 
   FaBell,
-  FaShoppingBag
+  FaShoppingBag,
+  FaHeart
 } from "react-icons/fa";
 
 export default function Profile() {
@@ -17,22 +18,31 @@ export default function Profile() {
   const navigate = useNavigate();
   const location = useLocation();
   
+  // Force rerender on route change to ensure content visibility
+  useEffect(() => {
+    // This ensures the child routes are properly rendered
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+  
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
   
-  // Animation variants
+  // Animation variants with longer duration and no exit animation for child content
   const pageVariants = {
     initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.1 } },
-    exit: { opacity: 0, transition: { duration: 0.3 } }
+    animate: { opacity: 1, transition: { duration: 0.4 } },
+    exit: { opacity: 0, transition: { duration: 0.2 } }
   };
   
   const contentVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.4 } }
   };
 
   // Get page title based on current path
@@ -51,7 +61,7 @@ export default function Profile() {
     const path = location.pathname;
     if (path === "/profile") return <FaUser className="text-blue-600 dark:text-blue-400" />;
     if (path.includes("/orders")) return <FaShoppingBag className="text-blue-600 dark:text-blue-400" />;
-    if (path.includes("/wishlist")) return <FaRegQuestionCircle className="text-blue-600 dark:text-blue-400" />;
+    if (path.includes("/wishlist")) return <FaHeart className="text-red-500 dark:text-red-400" />;
     return <FaUser className="text-blue-600 dark:text-blue-400" />;
   };
   
@@ -131,20 +141,6 @@ export default function Profile() {
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Track purchases</p>
                 </motion.div>
               </Link>
-              
-              <Link to="/profile/wishlist" className="group">
-                <motion.div 
-                  whileHover={{ y: -4 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 mb-3 group-hover:scale-110 transition-transform">
-                    <FaBell className="text-xl" />
-                  </div>
-                  <h3 className="font-medium text-gray-900 dark:text-white text-sm">Notifications</h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">3 unread</p>
-                </motion.div>
-              </Link>
-              
               <Link to="/help" className="group">
                 <motion.div 
                   whileHover={{ y: -4 }}
@@ -173,10 +169,7 @@ export default function Profile() {
             </div>
           </motion.div>
           
-          <motion.div 
-            variants={contentVariants}
-            className="flex flex-col md:flex-row gap-6"
-          >
+          <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/4 lg:w-1/5">
               <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
                 <Sidebar user={user} handleLogout={handleLogout} />
@@ -185,21 +178,15 @@ export default function Profile() {
             
             <div className="flex-1">
               <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg min-h-[600px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={location.pathname}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="h-full p-6 md:p-8"
-                  >
+                {/* Use a simpler animation without exit animation to prevent content disappearing */}
+                <div className="h-full" style={{ opacity: 1 }}>
+                  <div className="p-6 md:p-8">
                     <Outlet />
-                  </motion.div>
-                </AnimatePresence>
+                  </div>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>

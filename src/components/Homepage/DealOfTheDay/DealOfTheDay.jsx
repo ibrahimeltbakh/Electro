@@ -86,16 +86,16 @@ const DealOfTheDay = () => {
             
             <div className="flex items-center gap-4 mb-8">
               <div className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg p-4 flex flex-col items-center w-20">
-                <span className="text-3xl font-bold text-black dark:text-white ">{timeLeft.hours.toString().padStart(2, '0')}</span>
-                <span className="text-xs text-black dark:text-white ">Hours</span>
+                <span className="text-3xl font-bold text-black dark:text-black ">{timeLeft.hours.toString().padStart(2, '0')}</span>
+                <span className="text-xs text-black dark:text-black ">Hours</span>
               </div>
               <div className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg p-4 flex flex-col items-center w-20">
-                <span className="text-3xl text-black dark:text-white font-bold ">{timeLeft.minutes.toString().padStart(2, '0')}</span>
-                <span className="text-xs text-black dark:text-white ">Minutes</span>
+                <span className="text-3xl text-black dark:text-black font-bold ">{timeLeft.minutes.toString().padStart(2, '0')}</span>
+                <span className="text-xs text-black dark:text-black ">Minutes</span>
               </div>
               <div className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg p-4 flex flex-col items-center w-20">
-                <span className="text-3xl text-black dark:text-white font-bold ">{timeLeft.seconds.toString().padStart(2, '0')}</span>
-                <span className="text-xs text-black dark:text-white ">Seconds</span>
+                <span className="text-3xl text-black dark:text-black font-bold ">{timeLeft.seconds.toString().padStart(2, '0')}</span>
+                <span className="text-xs text-black dark:text-black ">Seconds</span>
               </div>
             </div>
             
