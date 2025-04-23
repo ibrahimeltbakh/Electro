@@ -6,27 +6,40 @@ import useRemoveFromCart from '@/Hooks/cart/useRemoveFromCart';
 import useGetCart from '@/Hooks/cart/useGetCart';
 
 const CartToggleButton = ({ productId, className = '', iconOnly = false, quantity = null }) => {
-  const { data: cartData } = useGetCart();
-  const { mutate: addToCart } = useAddToCart();
-  const { mutate: removeFromCart } = useRemoveFromCart();
+  const { data: cartData, refetch } = useGetCart();
+  const { mutate: addToCart, isLoading: isAdding } = useAddToCart();
+  const { mutate: removeFromCart, isLoading: isRemoving } = useRemoveFromCart();
   const [isInCart, setIsInCart] = useState(false);
-  const [cartItem, setCartItem] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // Check if the product is in the cart on component mount and when cart data changes
   useEffect(() => {
     if (cartData?.cart?.products) {
       const foundItem = cartData.cart.products.find(
         item => item.productId?._id === productId
       );
       setIsInCart(!!foundItem);
-      setCartItem(foundItem);
     }
   }, [cartData, productId]);
 
   const handleCartToggle = () => {
+    setIsLoading(true);
     if (isInCart) {
-      removeFromCart({ productId });
+      removeFromCart({ productId }, {
+        onSuccess: () => {
+          setIsLoading(false);
+          refetch(); // Ensure cart data is updated
+        },
+        onError: () => setIsLoading(false)
+      });
     } else {
-      addToCart({ productId });
+      addToCart({ productId }, {
+        onSuccess: () => {
+          setIsLoading(false); 
+          refetch(); // Ensure cart data is updated
+        },
+        onError: () => setIsLoading(false)
+      });
     }
   };
 
@@ -71,11 +84,12 @@ const CartToggleButton = ({ productId, className = '', iconOnly = false, quantit
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       onClick={handleCartToggle}
-      className={getButtonStyle()}
+      disabled={isLoading || isAdding || isRemoving}
+      className={`${getButtonStyle()} ${(isLoading || isAdding || isRemoving) ? 'opacity-70 cursor-wait' : ''}`}
       aria-label={isInCart ? "Remove from cart" : "Add to cart"}
     >
       {iconOnly ? (
-        isInCart ? <FaCheckCircle className="text-lg" /> : <FaShoppingCart className="text-lg" />
+        isInCart ? <FaTrashAlt className="text-lg" /> : <FaShoppingCart className="text-lg" />
       ) : (
         <>
           {isInCart ? <FaTrashAlt /> : <FaShoppingCart />}
