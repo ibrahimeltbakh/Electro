@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import NewsLetter from "../components/Homepage/NewsLetter";
 import ScrollToTop from "@/components/Homepage/ScrollToTop";
+import Footer from "@/components/Footer/Footer";
 
 export default function Layout() {
   return (
