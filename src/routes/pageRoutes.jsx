@@ -20,6 +20,8 @@ import Profile from "@/pages/profile/Profile";
 import LoginPage from "@/pages/Login";
 import NotFound from "@/pages/NotFound";
 import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
+import Support from "@/pages/Support";
+import Help from "@/pages/Help";
 
 const pageRoutes = [
   { path: "/", element: <Home /> },
@@ -37,6 +39,14 @@ const pageRoutes = [
   {
     path: "/category/:id",
     element: <CategoryDetails />,
+  },
+  {
+    path: "/contact",
+    element: <Support />,
+  },
+  {
+    path: "/help",
+    element: <Help />,
   },
   {
     path: "/cart",
