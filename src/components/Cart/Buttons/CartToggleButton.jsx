@@ -32,7 +32,7 @@ const CartToggleButton = ({ productId, className = '', iconOnly = false, quantit
       removeFromCart({ productId }, {
         onSuccess: () => {
           setIsLoading(false);
-          toast.success("Removed from cart");
+          // toast.success("Removed from cart");
           refetch();
         },
         onError: () => {
