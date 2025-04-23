@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaShoppingCart, FaCheckCircle, FaTrashAlt } from 'react-icons/fa';
+import { FaShoppingCart, FaTrashAlt, FaCheck } from 'react-icons/fa';
 import useAddToCart from '@/Hooks/cart/useAddToCart';
 import useRemoveFromCart from '@/Hooks/cart/useRemoveFromCart';
 import useGetCart from '@/Hooks/cart/useGetCart';
+import { toast } from 'react-hot-toast';
 
 const CartToggleButton = ({ productId, className = '', iconOnly = false, quantity = null }) => {
   const { data: cartData, refetch } = useGetCart();
@@ -11,8 +12,9 @@ const CartToggleButton = ({ productId, className = '', iconOnly = false, quantit
   const { mutate: removeFromCart, isLoading: isRemoving } = useRemoveFromCart();
   const [isInCart, setIsInCart] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
 
-  // Check if the product is in the cart on component mount and when cart data changes
+  // Check if the product is in the cart whenever cart data changes
   useEffect(() => {
     if (cartData?.cart?.products) {
       const foundItem = cartData.cart.products.find(
@@ -23,22 +25,34 @@ const CartToggleButton = ({ productId, className = '', iconOnly = false, quantit
   }, [cartData, productId]);
 
   const handleCartToggle = () => {
+    if (isLoading || isAdding || isRemoving) return;
+    
     setIsLoading(true);
     if (isInCart) {
       removeFromCart({ productId }, {
         onSuccess: () => {
           setIsLoading(false);
-          refetch(); // Ensure cart data is updated
+          toast.success("Removed from cart");
+          refetch();
         },
-        onError: () => setIsLoading(false)
+        onError: () => {
+          setIsLoading(false);
+          toast.error("Failed to remove from cart");
+        }
       });
     } else {
       addToCart({ productId }, {
         onSuccess: () => {
-          setIsLoading(false); 
-          refetch(); // Ensure cart data is updated
+          setIsLoading(false);
+          setShowFeedback(true);
+          toast.success("Added to cart");
+          setTimeout(() => setShowFeedback(false), 1500);
+          refetch();
         },
-        onError: () => setIsLoading(false)
+        onError: () => {
+          setIsLoading(false);
+          toast.error("Failed to add to cart");
+        }
       });
     }
   };
@@ -46,15 +60,16 @@ const CartToggleButton = ({ productId, className = '', iconOnly = false, quantit
   // Style based on state
   const getButtonStyle = () => {
     if (iconOnly) {
-      return `p-3 rounded-xl ${isInCart 
-        ? 'bg-green-600 hover:bg-green-700' 
-        : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'} 
-        text-white shadow-md transition-all ${className}`;
+      return `p-3 rounded-xl ${
+        isInCart 
+          ? 'bg-green-600 hover:bg-red-600' 
+          : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
+      } text-white shadow-md transition-all ${className}`;
     }
     
     return `py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-all 
       ${isInCart 
-        ? 'bg-green-600 hover:bg-green-700 text-white' 
+        ? 'bg-green-600 hover:bg-red-600 text-white' 
         : 'bg-blue-600 hover:bg-blue-700 text-white'
       } shadow-md w-full ${className}`;
   };
@@ -89,13 +104,35 @@ const CartToggleButton = ({ productId, className = '', iconOnly = false, quantit
       aria-label={isInCart ? "Remove from cart" : "Add to cart"}
     >
       {iconOnly ? (
-        isInCart ? <FaTrashAlt className="text-lg" /> : <FaShoppingCart className="text-lg" />
+        isInCart ? 
+          <FaCheck className="text-lg" /> : 
+          <FaShoppingCart className="text-lg" />
       ) : (
         <>
-          {isInCart ? <FaTrashAlt /> : <FaShoppingCart />}
-          <span>{isInCart ? "Remove from Cart" : "Add to Cart"}</span>
+          {isInCart ? (
+            <>
+              <FaTrashAlt />
+              <span>Remove from Cart</span>
+            </>
+          ) : (
+            <>
+              <FaShoppingCart />
+              <span>Add to Cart</span>
+            </>
+          )}
         </>
       )}
+      
+      {/* {showFeedback && (
+        <motion.span
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          className="absolute inset-0 flex items-center justify-center bg-green-600 rounded-xl text-white"
+        >
+          <FaCheck className="mr-2" /> Added!
+        </motion.span>
+      )} */}
     </motion.button>
   );
 };

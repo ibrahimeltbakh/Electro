@@ -18,9 +18,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Force rerender on route change to ensure content visibility
   useEffect(() => {
-    // This ensures the child routes are properly rendered
     const timer = setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
     }, 100);
@@ -33,7 +31,6 @@ export default function Profile() {
     navigate("/login");
   };
   
-  // Animation variants with longer duration and no exit animation for child content
   const pageVariants = {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { duration: 0.4 } },
@@ -45,18 +42,14 @@ export default function Profile() {
     animate: { opacity: 1, y: 0, transition: { duration: 0.4 } }
   };
 
-  // Get page title based on current path
   const getPageTitle = () => {
     const path = location.pathname;
     if (path === "/profile") return "Account Overview";
     if (path.includes("/orders")) return "My Orders";
     if (path.includes("/wishlist")) return "My Wishlist";
-    if (path.includes("/payment")) return "Payment Methods";
-    if (path.includes("/addresses")) return "My Addresses";
     return "My Account";
   };
   
-  // Get page icon based on current path
   const getPageIcon = () => {
     const path = location.pathname;
     if (path === "/profile") return <FaUser className="text-blue-600 dark:text-blue-400" />;
@@ -139,6 +132,19 @@ export default function Profile() {
                   </div>
                   <h3 className="font-medium text-gray-900 dark:text-white text-sm">Orders</h3>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Track purchases</p>
+                </motion.div>
+              </Link>
+
+               <Link to="/profile/wishlist" className="group">
+                <motion.div 
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center"
+                >
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3 group-hover:scale-110 transition-transform">
+                    <FaHeart className="text-xl" />
+                  </div>
+                  <h3 className="font-medium text-gray-900 dark:text-white text-sm">Wishlist</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Track Your Wishlist</p>
                 </motion.div>
               </Link>
               <Link to="/help" className="group">
