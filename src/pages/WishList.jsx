@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaShoppingCart, FaHeart, FaTrashAlt, FaArrowLeft, FaEye } from "react-icons/fa";
+import { FaShoppingCart, FaHeart, FaTrashAlt, FaArrowLeft, FaEye, FaSync } from "react-icons/fa";
 import useGetWishList from "@/Hooks/wishList/useGetWishList";
 import useRemoveFromWishlist from "@/Hooks/wishList/useRemoveFromWishlist";
 import useAddToCart from "@/Hooks/cart/useAddToCart";
@@ -9,7 +9,6 @@ import Error from "@/components/Error/Error";
 import Loading from "@/components/Loading/Loading";
 import CartToggleButton from "@/components/Cart/Buttons/CartToggleButton";
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { 
@@ -30,7 +29,7 @@ const itemVariants = {
 
 export default function WishList() {
   const { data, isLoading, isError, refetch } = useGetWishList();
-  const { mutate: removeFromWishlist } = useRemoveFromWishlist();
+  const { mutate: removeFromWishlist, isLoading: isRemoving } = useRemoveFromWishlist();
   const { mutate: addToCart } = useAddToCart();
   const location = useLocation();
 
@@ -38,6 +37,8 @@ export default function WishList() {
   useEffect(() => {
     refetch();
   }, [refetch, location]);
+
+
 
   // Format price with commas
   const formatPrice = (price) => {
@@ -115,15 +116,7 @@ export default function WishList() {
             </motion.p>
           </div>
           
-          <motion.div variants={itemVariants}>
-            <Link 
-              to="/shop" 
-              className="inline-flex items-center justify-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
-            >
-              <FaArrowLeft className="text-sm" />
-              <span>Continue Shopping</span>
-            </Link>
-          </motion.div>
+          
         </div>
 
         <motion.div 
@@ -138,6 +131,7 @@ export default function WishList() {
                 layout
                 whileHover={{ y: -8 }}
                 className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group h-full flex flex-col"
+                style={{ opacity: 1 }} // Force opacity to 1
               >
                 <div className="relative overflow-hidden">
                   <Link to={`/product/${product._id}`} className="block">
@@ -153,6 +147,7 @@ export default function WishList() {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={() => removeFromWishlist({ productId: product._id })}
+                      disabled={isRemoving}
                       className="w-9 h-9 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md flex items-center justify-center hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                       aria-label="Remove from wishlist"
                     >

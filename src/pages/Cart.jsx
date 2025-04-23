@@ -13,7 +13,8 @@ import {
   FaShieldAlt,
   FaCreditCard as FaCreditCardAlt,
   FaBoxOpen,
-  FaRegClock
+  FaRegClock,
+  FaHeart
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Error from "@/components/Error/Error";
@@ -313,23 +314,7 @@ export default function Cart() {
                     <span className="text-green-600 dark:text-green-400">Free</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 py-4 border-t border-gray-100 dark:border-gray-700">
-                    <div className="relative flex-1">
-                      <input 
-                        type="text" 
-                        placeholder="Enter coupon code" 
-                        className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all"
-                      />
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2 px-4 text-sm font-medium transition-colors flex items-center gap-1"
-                    >
-                      <FaPercent className="text-xs" />
-                      Apply
-                    </motion.button>
-                  </div>
+                  
                   
                   <div className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-4">
                     <div className="flex justify-between font-bold text-lg">
