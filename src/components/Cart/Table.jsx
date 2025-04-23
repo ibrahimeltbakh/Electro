@@ -36,7 +36,7 @@ export default function CartTable({ cartProducts, total }) {
             {tableHead.map((item) => (
               <TableHead
                 key={item.key}
-                className={`px-6 py-4 text-sm font-medium text-gray-700 dark:text-black ${
+                className={`px-6 py-4 text-sm font-medium text-gray-700 dark:text-white ${
                   item.key === "actions" ? "text-right" : "text-left"
                 }`}
               >
@@ -46,7 +46,7 @@ export default function CartTable({ cartProducts, total }) {
           </TableRow>
         </TableHeader>
 
-        <TableBody className="divide-y divide-gray-200 dark:divide-gray-700">
+        <TableBody className="divide-y divide-gray-200 dark:divide-gray-700 ">
           {cartProducts.map((product, index) => (
             <motion.tr
               key={product?.productId?._id}
@@ -65,17 +65,17 @@ export default function CartTable({ cartProducts, total }) {
                     />
                   </div>
                   <div>
-                    <p className="text-base font-medium text-gray-900 dark:text-black line-clamp-1">
+                    <p className="text-base font-medium text-gray-900 dark:text-white line-clamp-1">
                       {product?.productId?.title}
                     </p>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-black hidden sm:block">
+                    <p className="mt-1 text-sm text-gray-500 dark:text-white hidden sm:block">
                       {product?.productId?.category?.name}
                     </p>
                   </div>
                 </div>
               </TableCell>
               
-              <TableCell className="py-4 px-6 text-base text-gray-700 dark:text-black">
+              <TableCell className="py-4 px-6 text-base text-gray-700 dark:text-white">
                 <div className="flex flex-col">
                   <span className="font-medium">{formatCurrency(product?.productId?.priceAfterDiscount)}</span>
                   {product?.productId?.discount > 0 && (
@@ -104,7 +104,7 @@ export default function CartTable({ cartProducts, total }) {
                 </div>
               </TableCell>
               
-              <TableCell className="py-4 px-6 text-base font-medium text-gray-900 dark:text-black">
+              <TableCell className="py-4 px-6 text-base font-medium text-gray-900 dark:text-white">
                 {formatCurrency(product?.productId?.priceAfterDiscount * product?.quantity)}
               </TableCell>
               
@@ -120,7 +120,7 @@ export default function CartTable({ cartProducts, total }) {
             <TableCell colSpan={3} className="px-6 py-4">
               <ClearCartButton />
             </TableCell>
-            <TableCell className="px-6 py-4 text-base font-semibold text-gray-900 dark:text-black">
+            <TableCell className="px-6 py-4 text-base font-semibold text-gray-900 dark:text-white">
               Total
             </TableCell>
             <TableCell className="px-6 py-4 text-right text-lg font-bold text-blue-600 dark:text-blue-400 ">
