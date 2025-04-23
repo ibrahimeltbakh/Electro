@@ -1,37 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import useAddToCart from '@/Hooks/cart/useAddToCart'
-import useAddToWishlist from '@/Hooks/wishList/useAddToWishlist'
-import useRemoveFromWishlist from '@/Hooks/wishList/useRemoveFromWishlist'
-import useGetWishList from '@/Hooks/wishList/useGetWishList'
-import { FaHeart, FaRegHeart, FaEye, FaShoppingCart, FaStar } from 'react-icons/fa'
+import CartToggleButton from '@/components/Cart/Buttons/CartToggleButton'
+import WishlistHeartButton from '@/components/WishList/WishlistHeartButton'
+import { FaEye, FaStar } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function ProductCard({ product }) {
-    const { mutate: addToCart } = useAddToCart()
-    const { mutate: addToWishlist } = useAddToWishlist()
-    const { mutate: removeFromWishlist } = useRemoveFromWishlist()
-    const { data: wishlistData } = useGetWishList()
-    
-    const [isInWishlist, setIsInWishlist] = useState(false)
-    
-    useEffect(() => {
-        if (wishlistData?.wishlist?.products) {
-            const inWishlist = wishlistData.wishlist.products.some(
-                item => item._id === product._id
-            )
-            setIsInWishlist(inWishlist)
-        }
-    }, [wishlistData, product._id])
-    
-    const handleWishlist = () => {
-        if (isInWishlist) {
-            removeFromWishlist({ productId: product._id })
-        } else {
-            addToWishlist({ productId: product._id })
-        }
-    }
-    
     return (
         <motion.div 
             whileHover={{ y: -8 }}
@@ -39,17 +13,7 @@ export default function ProductCard({ product }) {
             className="relative group bg-white rounded-xl dark:bg-gray-800 dark:shadow-red-900 my-3 overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
         >
             <div className="absolute top-3 right-3 z-30">
-                <motion.button 
-                    whileTap={{ scale: 0.85 }}
-                    onClick={handleWishlist}
-                    className="w-9 h-9 rounded-full backdrop-blur-md bg-white/70 flex items-center justify-center shadow-md hover:shadow-lg transition-all"
-                >
-                    {isInWishlist ? (
-                        <FaHeart className="text-red-500 text-lg" />
-                    ) : (
-                        <FaRegHeart className="text-gray-500 group-hover:text-red-500 transition-colors text-lg" />
-                    )}
-                </motion.button>
+                <WishlistHeartButton productId={product._id} />
             </div>
             
             <div className="absolute top-3 left-3 z-20">
@@ -99,12 +63,12 @@ export default function ProductCard({ product }) {
                         <span className="text-sm text-gray-600 font-medium">4.8</span>
                     </div>
                     <span className="text-xs font-medium text-gray-500">
-                        {product.quantity > 5 ? 'In Stock' : `Only ${product.quantity} left`}
+                        {product.quantity > 5 ? 'In Stock' : product.quantity > 0 ? `Only ${product.quantity} left` : 'Out of Stock'}
                     </span>
                 </div>
                 
                 <Link to={`/product/${product._id}`} className="group">
-                    <h2 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    <h2 className="text-lg font-bold text-gray-800 dark:text-gray-400 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
                         {product.title}
                     </h2>
                 </Link>
@@ -127,14 +91,11 @@ export default function ProductCard({ product }) {
                         </div>
                     </div>
                     
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => addToCart({ productId: product._id })}
-                        className="p-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md hover:shadow-blue-200 transition-all"
-                    >
-                        <FaShoppingCart className="text-lg" />
-                    </motion.button>
+                    <CartToggleButton 
+                        productId={product._id} 
+                        iconOnly={true}
+                        quantity={product.quantity}
+                    />
                 </div>
             </div>
         </motion.div>
