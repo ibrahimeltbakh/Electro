@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import NewsLetter from "../components/Homepage/NewsLetter";
 import ScrollToTop from "@/components/Homepage/ScrollToTop";
 import Footer from "@/components/Footer/Footer";
+import AgentButton from "@/components/Homepage/Agent";
 
 export default function Layout() {
   return (
@@ -16,6 +17,7 @@ export default function Layout() {
       <NewsLetter />
       <Footer />
       <ScrollToTop />
-      </div>
+      <AgentButton />
+    </div>
   );
 }
