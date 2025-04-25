@@ -22,6 +22,7 @@ import NotFound from "@/pages/NotFound";
 import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
 import Support from "@/pages/Support";
 import Help from "@/pages/Help";
+import ProductsComparison from "@/pages/ProductsComparison";
 
 const pageRoutes = [
   { path: "/", element: <Home /> },
@@ -47,6 +48,14 @@ const pageRoutes = [
   {
     path: "/help",
     element: <Help />,
+  },
+  {
+    path: "/comparison",
+    element: (
+      <ProtectedRoute>
+        <ProductsComparison />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/cart",
