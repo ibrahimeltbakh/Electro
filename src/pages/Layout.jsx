@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../components/navbar/NavBar";
 import { Outlet } from "react-router-dom";
 
@@ -8,13 +8,20 @@ import Footer from "@/components/Footer/Footer";
 import AgentButton from "@/components/Homepage/Agent";
 
 export default function Layout() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
       <main className="flex-grow">
         <Outlet />
       </main>
-      {!location.pathname.startsWith("/admin") && <NewsLetter />}
+
+      {isClient && !location.pathname.startsWith("/admin") && <NewsLetter />}
 
       <Footer />
       <ScrollToTop />
