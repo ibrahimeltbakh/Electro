@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavBar from "../components/navbar/NavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import NewsLetter from "../components/Homepage/NewsLetter";
 import ScrollToTop from "@/components/Homepage/ScrollToTop";
@@ -8,11 +8,7 @@ import Footer from "@/components/Footer/Footer";
 import AgentButton from "@/components/Homepage/Agent";
 
 export default function Layout() {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const location = useLocation();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -21,7 +17,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {isClient && !location.pathname.startsWith("/admin") && <NewsLetter />}
+      {!location.pathname.startsWith("/admin") && <NewsLetter />}
 
       <Footer />
       <ScrollToTop />
