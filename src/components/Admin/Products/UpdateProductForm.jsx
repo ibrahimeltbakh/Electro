@@ -17,7 +17,6 @@ import Loading from "@/components/Loading/Loading";
 import Error from "@/components/Error/Error";
 
 export default function UpdateProductForm({ product }) {
-  console.log(product);
   const [title, setTitle] = useState(product?.title || "");
   const [description, setDescription] = useState(product?.description || "");
   const [price, setPrice] = useState(product?.price || "");

@@ -12,7 +12,15 @@ import RemoveButton from "./Buttons/RemoveButton";
 import PlusButton from "./Buttons/PlusQuantity";
 import MinusButton from "./Buttons/minusQuantity";
 import ClearCartButton from "./Buttons/ClearCartButton";
-import { FaShoppingBag, FaTrashAlt, FaGift, FaTag, FaRegSadTear, FaShoppingCart, FaHeart } from "react-icons/fa";
+import {
+  FaShoppingBag,
+  FaTrashAlt,
+  FaGift,
+  FaTag,
+  FaRegSadTear,
+  FaShoppingCart,
+  FaHeart,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const tableHead = [
@@ -26,16 +34,20 @@ const tableHead = [
 // Animation variants
 const tableVariants = {
   hidden: { opacity: 0 },
-  visible: { 
+  visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08 }
-  }
+    transition: { staggerChildren: 0.08 },
+  },
 };
 
 const rowVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 14 } },
-  exit: { opacity: 0, x: -100, transition: { duration: 0.3 } }
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 120, damping: 14 },
+  },
+  exit: { opacity: 0, x: -100, transition: { duration: 0.3 } },
 };
 
 export default function CartTable({ cartProducts, total }) {
@@ -47,11 +59,7 @@ export default function CartTable({ cartProducts, total }) {
   return (
     <div className="overflow-x-auto">
       <AnimatePresence>
-        <motion.div
-          variants={tableVariants}
-          initial="hidden"
-          animate="visible"
-        >
+        <motion.div variants={tableVariants} initial="hidden" animate="visible">
           <Table className="w-full">
             <TableHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-blue-900/30">
               <TableRow>
@@ -60,8 +68,7 @@ export default function CartTable({ cartProducts, total }) {
                     key={item.key}
                     className={`px-6 py-4 text-sm font-semibold text-blue-900 dark:text-blue-100 ${
                       item.key === "actions" ? "text-right" : "text-left"
-                    }`}
-                  >
+                    }`}>
                     {item.title}
                   </TableHead>
                 ))}
@@ -79,15 +86,15 @@ export default function CartTable({ cartProducts, total }) {
                     exit="exit"
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                     className="group hover:bg-blue-50/70 dark:hover:bg-blue-900/10 transition-colors"
-                    layoutId={`cart-item-${product?.productId?._id}`}
-                  >
+                    layoutId={`cart-item-${product?.productId?._id}`}>
                     <TableCell className="py-5 px-6">
-                      <Link to={`/product/${product?.productId?._id}`} className="group-hover:opacity-80 transition-opacity">
+                      <Link
+                        to={`/product/${product?.productId?._id}`}
+                        className="group-hover:opacity-80 transition-opacity">
                         <div className="flex items-center space-x-4">
-                          <motion.div 
+                          <motion.div
                             whileHover={{ scale: 1.05 }}
-                            className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 group-hover:border-blue-200 transition-colors bg-white dark:bg-gray-800 shadow-sm"
-                          >
+                            className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 group-hover:border-blue-200 transition-colors bg-white dark:bg-gray-800 shadow-sm">
                             <img
                               src={product?.productId?.imageCover?.secure_url}
                               alt={product?.productId?.title}
@@ -114,10 +121,14 @@ export default function CartTable({ cartProducts, total }) {
                         </div>
                       </Link>
                     </TableCell>
-                    
+
                     <TableCell className="py-5 px-6 text-base text-gray-700 dark:text-white">
                       <div className="flex flex-col">
-                        <span className="font-medium">{formatCurrency(product?.productId?.priceAfterDiscount)}</span>
+                        <span className="font-medium">
+                          {formatCurrency(
+                            product?.productId?.priceAfterDiscount
+                          )}
+                        </span>
                         {product?.productId?.discount > 0 && (
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-xs text-gray-500 line-through">
@@ -131,13 +142,12 @@ export default function CartTable({ cartProducts, total }) {
                         )}
                       </div>
                     </TableCell>
-                    
+
                     <TableCell className="py-5 px-6">
                       <div className="flex items-center justify-start">
-                        <motion.div 
+                        <motion.div
                           whileHover={{ scale: 1.03 }}
-                          className="flex items-center border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-gray-700"
-                        >
+                          className="flex items-center border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-gray-700">
                           <MinusButton
                             productId={product?.productId?._id}
                             quantity={product?.quantity}
@@ -147,24 +157,30 @@ export default function CartTable({ cartProducts, total }) {
                           </span>
                           <PlusButton
                             productId={product?.productId?._id}
+                            productStock={product?.productId?.stock}
                             quantity={product?.quantity}
                           />
                         </motion.div>
-                        
+
                         {product?.productId?.quantity <= 5 && (
                           <span className="ml-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
-                            {product?.productId?.quantity <= 1 ? 'Last item!' : `Only ${product?.productId?.quantity} left`}
+                            {product?.productId?.quantity <= 1
+                              ? "Last item!"
+                              : `Only ${product?.productId?.quantity} left`}
                           </span>
                         )}
                       </div>
                     </TableCell>
-                    
+
                     <TableCell className="py-5 px-6 text-base font-medium">
                       <span className="text-blue-600 dark:text-blue-400">
-                        {formatCurrency(product?.productId?.priceAfterDiscount * product?.quantity)}
+                        {formatCurrency(
+                          product?.productId?.priceAfterDiscount *
+                            product?.quantity
+                        )}
                       </span>
                     </TableCell>
-                    
+
                     <TableCell className="py-5 px-6 text-right">
                       <RemoveButton productId={product?.productId?._id} />
                     </TableCell>
@@ -191,37 +207,40 @@ export default function CartTable({ cartProducts, total }) {
       </AnimatePresence>
 
       {cartProducts.length === 0 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="py-16 text-center"
-        >
+          className="py-16 text-center">
           <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/20 rounded-full flex items-center justify-center shadow-inner">
             <FaRegSadTear className="text-blue-400 dark:text-blue-300 text-3xl" />
           </div>
-          <h3 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Your cart is empty</h3>
+          <h3 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
+            Your cart is empty
+          </h3>
           <p className="mt-2 text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-            Looks like you haven't added any products to your cart yet. Start shopping to fill it with amazing items!
+            Looks like you haven't added any products to your cart yet. Start
+            shopping to fill it with amazing items!
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Link to="/shop">
               <motion.button
-                whileHover={{ scale: 1.03, boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.3)" }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.3)",
+                }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg font-medium shadow-lg hover:shadow-blue-500/20 flex items-center justify-center gap-2 transition-all"
-              >
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg font-medium shadow-lg hover:shadow-blue-500/20 flex items-center justify-center gap-2 transition-all">
                 <FaShoppingCart className="text-sm" />
                 <span>Browse Shop</span>
               </motion.button>
             </Link>
-            
+
             <Link to="/wishlist">
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-white px-6 py-3 rounded-lg font-medium shadow-sm hover:shadow-md flex items-center justify-center gap-2 transition-all"
-              >
+                className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-white px-6 py-3 rounded-lg font-medium shadow-sm hover:shadow-md flex items-center justify-center gap-2 transition-all">
                 <FaHeart className="text-red-500 dark:text-red-400 text-sm" />
                 <span>View Wishlist</span>
               </motion.button>

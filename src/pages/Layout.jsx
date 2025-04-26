@@ -14,7 +14,8 @@ export default function Layout() {
       <main className="flex-grow">
         <Outlet />
       </main>
-      <NewsLetter />
+      {!location.pathname.startsWith("/admin") && <NewsLetter />}
+
       <Footer />
       <ScrollToTop />
       <AgentButton />

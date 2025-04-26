@@ -23,7 +23,6 @@ const tableHead = [
 const ITEMS_PER_PAGE = 5;
 
 export default function ProductsTable({ products = [] }) {
-  console.log(products);
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
