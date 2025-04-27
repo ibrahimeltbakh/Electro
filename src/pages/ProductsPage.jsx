@@ -1,21 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import {
   FaFilter,
   FaSearch,
-  FaHeart,
-  FaRegHeart,
-  FaShoppingCart,
-  FaEye,
   FaTimes,
   FaArrowLeft,
-  FaArrowDown,
   FaArrowUp,
   FaThLarge,
   FaThList,
-  FaStar,
 } from "react-icons/fa";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import Loading from "@/components/Loading/Loading";
@@ -27,7 +20,7 @@ import useAddToCart from "@/Hooks/cart/useAddToCart";
 import useAddToWishlist from "@/Hooks/wishList/useAddToWishlist";
 import useRemoveFromWishlist from "@/Hooks/wishList/useRemoveFromWishlist";
 import useGetWishList from "@/Hooks/wishList/useGetWishList";
-import CartToggleButton from "@/components/Cart/Buttons/CartToggleButton";
+import ShopCard from "@/components/Cards/Product/ShopCard";
 
 export default function ProductsPage() {
   // Filter states
@@ -46,7 +39,7 @@ export default function ProductsPage() {
   const itemsPerPage = 8;
 
   // Hooks
-  const { mutate: addToCart } = useAddToCart();
+
   const { mutate: addToWishlist } = useAddToWishlist();
   const { mutate: removeFromWishlist } = useRemoveFromWishlist();
   const { data: wishlistData } = useGetWishList();
@@ -110,17 +103,6 @@ export default function ProductsPage() {
         ? prev.filter((b) => b !== brandName)
         : [...prev, brandName]
     );
-  };
-
-  // Handle wishlist toggle
-  const handleWishlistToggle = (productId) => {
-    if (productsInWishlist[productId]) {
-      removeFromWishlist({ productId });
-      setProductsInWishlist((prev) => ({ ...prev, [productId]: false }));
-    } else {
-      addToWishlist({ productId });
-      setProductsInWishlist((prev) => ({ ...prev, [productId]: true }));
-    }
   };
 
   // Apply all filters
@@ -218,7 +200,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pb-16">
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 py-16">
         <div className="container mx-auto px-4">
           <motion.div
@@ -485,182 +467,11 @@ export default function ProductsPage() {
                       : "space-y-6"
                   }>
                   {currentProducts.map((product) => (
-                    <motion.div
+                    <ShopCard
                       key={product._id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4 }}>
-                      {viewMode === "grid" ? (
-                        <motion.div
-                          whileHover={{ y: -8 }}
-                          transition={{ duration: 0.3 }}
-                          className="relative group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                          <div className="absolute top-3 right-3 z-30">
-                            <motion.button
-                              whileTap={{ scale: 0.85 }}
-                              onClick={() => handleWishlistToggle(product._id)}
-                              className="w-9 h-9 rounded-full backdrop-blur-md bg-white/70 flex items-center justify-center shadow-md hover:shadow-lg transition-all">
-                              {productsInWishlist[product._id] ? (
-                                <FaHeart className="text-red-500 text-lg" />
-                              ) : (
-                                <FaRegHeart className="text-gray-500 group-hover:text-red-500 transition-colors text-lg" />
-                              )}
-                            </motion.button>
-                          </div>
-
-                          <div className="absolute top-3 left-3 z-20">
-                            {product.discount ? (
-                              <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                                -{product.discount}% OFF
-                              </span>
-                            ) : (
-                              <span className="bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                                NEW
-                              </span>
-                            )}
-                          </div>
-
-                          <div className="relative overflow-hidden h-56">
-                            <img
-                              src={product.imageCover.secure_url}
-                              alt={product.title}
-                              className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
-                            />
-
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-
-                            <motion.div
-                              initial={{ y: 20, opacity: 0 }}
-                              animate={{ y: 0, opacity: 1 }}
-                              exit={{ y: 20, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-white/80 to-transparent backdrop-blur-sm transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                              <Link
-                                to={`/product/${product._id}`}
-                                className="flex items-center justify-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-                                <FaEye />
-                                <span>Quick View</span>
-                              </Link>
-                            </motion.div>
-                          </div>
-
-                          <div className="flex flex-col flex-grow p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center">
-                                <FaStar className="text-yellow-400 mr-1" />
-                                <span className="text-sm text-gray-600 font-medium">
-                                  4.8
-                                </span>
-                              </div>
-                              <span className="text-xs font-medium text-gray-500">
-                                {product.quantity > 5
-                                  ? "In Stock"
-                                  : `Only ${product.quantity} left`}
-                              </span>
-                            </div>
-
-                            <Link
-                              to={`/product/${product._id}`}
-                              className="group">
-                              <h2 className="text-lg font-bold text-gray-800 mb-2 dark:text-gray-400 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                                {product.title}
-                              </h2>
-                            </Link>
-
-                            <p className="text-sm text-gray-500 mb-4 line-clamp-2">
-                              {product.description}
-                            </p>
-
-                            <div className="mt-auto flex items-end justify-between">
-                              <div className="flex flex-col">
-                                <div className="flex items-baseline gap-2">
-                                  <span className="text-xl font-bold text-blue-600">
-                                    ${product.price}
-                                  </span>
-                                  {product.oldPrice && (
-                                    <span className="text-sm line-through text-gray-400">
-                                      ${product.oldPrice}
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
-
-                              <CartToggleButton
-                                productId={product._id}
-                                iconOnly={true}
-                                quantity={product.quantity}
-                              />
-                            </div>
-                          </div>
-                        </motion.div>
-                      ) : (
-                        <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex">
-                          <Link
-                            to={`/product/${product._id}`}
-                            className="w-1/3 relative overflow-hidden">
-                            <div className="h-full flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-700">
-                              <img
-                                src={product.imageCover.secure_url}
-                                alt={product.title}
-                                className="max-h-48 max-w-full object-contain hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-
-                            {product.discount > 0 && (
-                              <div className="absolute top-2 left-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                -{product.discount}% OFF
-                              </div>
-                            )}
-                          </Link>
-
-                          <div className="w-2/3 p-5 flex flex-col">
-                            <div className="flex items-center text-yellow-400 text-xs mb-1">
-                              <div className="flex">
-                                {[...Array(5)].map((_, i) => (
-                                  <FaStar key={i} className="w-4 h-4" />
-                                ))}
-                              </div>
-                              <span className="ml-2 text-gray-500 dark:text-gray-400 text-xs">
-                                4.8 (120 reviews)
-                              </span>
-                            </div>
-
-                            <Link to={`/product/${product._id}`}>
-                              <h3 className="font-medium text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-2">
-                                {product.title}
-                              </h3>
-                            </Link>
-
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                              {product.description ||
-                                "Experience the future of technology with this amazing product."}
-                            </p>
-
-                            <div className="mt-auto flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <span className="text-lg font-bold text-blue-600">
-                                  ${product.price}
-                                </span>
-                                {product.oldPrice && (
-                                  <span className="text-sm line-through text-gray-500">
-                                    ${product.oldPrice}
-                                  </span>
-                                )}
-                              </div>
-
-                              <div className="flex gap-2">
-                                <CartToggleButton
-                                  productId={product._id}
-                                  iconOnly={false}
-                                  quantity={product.quantity}
-                                  className="px-4 py-2 text-sm"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </motion.div>
+                      product={product}
+                      viewMode={viewMode}
+                    />
                   ))}
                 </div>
 

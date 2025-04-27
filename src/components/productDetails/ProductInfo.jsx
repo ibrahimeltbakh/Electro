@@ -23,7 +23,9 @@ export default function ProductInfo({ product, mutate, mutation }) {
               />
             ))}
           </div>
-          <span className="text-gray-600 dark:text-gray-400">({product.rateNum} reviews)</span>
+          <span className="text-gray-600 dark:text-gray-400">
+            ({product.rateNum} reviews)
+          </span>
         </div>
       </div>
 
@@ -39,7 +41,9 @@ export default function ProductInfo({ product, mutate, mutation }) {
           )}
         </div>
 
-        <p className="text-gray-600 leading-relaxed dark:text-gray-300">{product?.description}</p>
+        <p className="text-gray-600 leading-relaxed dark:text-gray-300">
+          {product?.description}
+        </p>
 
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
@@ -60,20 +64,22 @@ export default function ProductInfo({ product, mutate, mutation }) {
           <span className="text-gray-600 dark:text-gray-400">Stock:</span>
           <span
             className={`font-semibold ${
-              product.stock > 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
+              product.stock > 0
+                ? "text-green-600 dark:text-green-400"
+                : "text-red-600 dark:text-red-400"
             }`}>
             {product?.stock} units
           </span>
         </div>
 
         <div className="flex space-x-4">
-          <CartToggleButton 
-            productId={product._id} 
-            quantity={product.stock} 
+          <CartToggleButton
+            productId={product._id}
+            stock={product.stock}
             className="flex-1"
           />
-          <WishlistHeartButton 
-            productId={product._id} 
+          <WishlistHeartButton
+            productId={product._id}
             className="p-3 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-red-500 w-14 h-14"
           />
         </div>

@@ -10,7 +10,7 @@ const CartToggleButton = ({
   productId,
   className = "",
   iconOnly = false,
-  quantity = null,
+  stock,
 }) => {
   const { data: cartData, refetch } = useGetCart();
   const { mutate: addToCart, isLoading: isAdding } = useAddToCart();
@@ -86,7 +86,7 @@ const CartToggleButton = ({
       } shadow-md w-full ${className}`;
   };
 
-  if (quantity !== null && quantity <= 0) {
+  if (stock === 0) {
     // Disabled state for out of stock products
     return (
       <button
