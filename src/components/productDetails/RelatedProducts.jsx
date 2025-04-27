@@ -1,6 +1,6 @@
 import React from "react";
 import useProducts from "@/Hooks/products/useProducts";
-import ProductCard from "../Cards/ProductCard";
+import ProductCard from "../Cards/Product/productCard";
 export default function RelatedProducts({ product }) {
   const { data: products } = useProducts();
   const relatedProducts = products?.products?.filter(
