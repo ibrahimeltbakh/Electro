@@ -18,7 +18,7 @@ export const addtoCart = async (productId) => {
     const token = getToken();
     if (!token) {
         toast.error("You must be logged in.");
-        return;
+        throw new Error("You must be logged in.");
     }
     const response = await api.post(
         "/cart",

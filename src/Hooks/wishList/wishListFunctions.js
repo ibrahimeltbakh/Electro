@@ -1,5 +1,5 @@
 import api from "@/lib/axios";
-
+import toast from "react-hot-toast";
 const getToken = () => {
     return (
         localStorage.getItem("token"));
@@ -17,11 +17,16 @@ export const GetWishListProducts = async () => {
 
 
 export const addtoWishlist = async (productId) => {
+    const token = getToken();
+    if (!token) {
+        toast.error("You must be logged in.");
+        throw new Error("You must be logged in.");
+    }
     const response = await api.post(
         "/wishList",
         { productId },
         {
-            headers: { token: getToken() },
+            headers: { token: token },
         }
     );
     return response.data;

@@ -44,7 +44,7 @@ const CartToggleButton = ({
           },
           onError: () => {
             setIsLoading(false);
-            toast.error("Failed to remove from cart");
+            // toast.error("Failed to remove from cart");
           },
         }
       );
@@ -61,7 +61,7 @@ const CartToggleButton = ({
           },
           onError: () => {
             setIsLoading(false);
-            toast.error("Failed to add to cart");
+            // toast.error("Failed to add to cart");
           },
         }
       );
