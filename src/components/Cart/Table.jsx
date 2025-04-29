@@ -28,7 +28,7 @@ const tableHead = [
   { title: "Price", key: "priceAfterDiscount" },
   { title: "Quantity", key: "amount" },
   { title: "Subtotal", key: "subtotal" },
-  { title: "", key: "actions" },
+  { title: "Actions", key: "actions" },
 ];
 
 // Animation variants
@@ -129,7 +129,7 @@ export default function CartTable({ cartProducts, total }) {
                             product?.productId?.priceAfterDiscount
                           )}
                         </span>
-                        {product?.productId?.discount > 0 && (
+                        {product?.productId?.discount > 1 && (
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-xs text-gray-500 line-through">
                               {formatCurrency(product?.productId?.price)}

@@ -16,7 +16,6 @@ import Error from "@/components/Error/Error";
 import useBrands from "@/Hooks/Brands/useBrands";
 import useCategories from "@/Hooks/category/usecatergories";
 import useProducts from "@/Hooks/products/useProducts";
-import useAddToCart from "@/Hooks/cart/useAddToCart";
 import useAddToWishlist from "@/Hooks/wishList/useAddToWishlist";
 import useRemoveFromWishlist from "@/Hooks/wishList/useRemoveFromWishlist";
 import useGetWishList from "@/Hooks/wishList/useGetWishList";

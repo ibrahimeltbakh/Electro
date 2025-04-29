@@ -1,5 +1,3 @@
-// Navbar.jsx
-
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
@@ -9,10 +7,12 @@ import {
   FaSignOutAlt,
   FaUserCircle,
   FaBars,
+  FaShoppingCart,
 } from "react-icons/fa";
 import { AuthContext } from "@/context/AuthContext/AuthContext";
 import { ModeToggle } from "../theme/Mode-toggle";
 import { motion, AnimatePresence } from "framer-motion";
+import CartIcon from "./CartIcon";
 
 export default function NavBar() {
   const { user, logout } = useContext(AuthContext);
@@ -21,15 +21,21 @@ export default function NavBar() {
   const navigate = useNavigate();
   const dropdownRef = useRef();
 
+  const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
+  const userEmail = user?.email;
+
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/shop", label: "Shop" },
-    { path: "/cart", label: "Cart" },
     { path: "/wishlist", label: "Wishlist" },
-    { path: "/admin", label: "Dashboard" },
     { path: "/categories", label: "Categories" },
     { path: "/brands", label: "Brands" },
+    { path: "/cart", label: <CartIcon /> },
   ];
+
+  userEmail === adminEmail
+    ? navLinks.push({ path: "/admin", label: "Dashboard" })
+    : null;
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -51,13 +57,6 @@ export default function NavBar() {
           className="text-2xl font-bold text-blue-600 dark:text-white">
           Electro
         </NavLink>
-
-        {/* Hamburger */}
-        <button
-          className="md:hidden text-gray-700 dark:text-white"
-          onClick={() => setMenuOpen(!menuOpen)}>
-          <FaBars size={22} />
-        </button>
 
         {/* Links Desktop */}
         <ul className="hidden md:flex space-x-6 font-medium text-sm text-gray-700 dark:text-gray-200">
@@ -142,6 +141,13 @@ export default function NavBar() {
             </AnimatePresence>
           </div>
         </div>
+
+        {/* Hamburger */}
+        <button
+          className="md:hidden text-gray-700 dark:text-white"
+          onClick={() => setMenuOpen(!menuOpen)}>
+          <FaBars size={22} />
+        </button>
       </div>
 
       {/* Mobile menu */}
