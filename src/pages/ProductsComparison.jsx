@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";

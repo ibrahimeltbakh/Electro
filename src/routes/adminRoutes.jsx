@@ -1,3 +1,5 @@
+import Home from "@/pages/Admin/Home";
+import { Navigate } from "react-router-dom";
 import Products from "@/pages/Admin/Products/Products";
 import AddProduct from "@/pages/Admin/Products/AddProduct";
 import Categories from "@/pages/Admin/Categories/Categories";
@@ -7,8 +9,9 @@ import AddBrand from "@/pages/Admin/Brands/AddBrand";
 import UpdateProduct from "@/pages/Admin/Products/UpdateProduct";
 import UpdateCategory from "@/pages/Admin/Categories/UpdateCategory";
 import UpdateBrand from "@/pages/Admin/Brands/UpdateBrans";
-import Home from "@/pages/Admin/Home";
-import { Navigate } from "react-router-dom";
+import Coupons from "@/pages/Admin/Coupons/Coupons";
+import AddCoupon from "@/pages/Admin/Coupons/AddCoupon";
+import UpdateCoupon from "@/pages/Admin/Coupons/UpdateCoupon";
 
 const adminRoutes = [
   { path: "", element: <Navigate to="home" replace /> },
@@ -22,6 +25,9 @@ const adminRoutes = [
   { path: "brands", element: <Brands /> },
   { path: "brands/add", element: <AddBrand /> },
   { path: "brands/update/:id", element: <UpdateBrand /> },
+  { path: "coupons", element: <Coupons /> },
+  { path: "coupons/add", element: <AddCoupon /> },
+  { path: "coupons/update/:id", element: <UpdateCoupon /> },
 ];
 
 export default adminRoutes;
