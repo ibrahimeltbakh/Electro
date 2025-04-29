@@ -8,7 +8,8 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
 import { SiBrandfolder } from "react-icons/si";
 import { TbBrandShopee } from "react-icons/tb";
-import { FaTicketAlt } from "react-icons/fa"; // أيقونة للكوبونات
+import { FaTicketAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 const sidebarGroups = [
   {
