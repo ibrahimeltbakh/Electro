@@ -6,10 +6,9 @@ import { BiSolidDownArrowAlt } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { AiOutlineProduct } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
+import { SiBrandfolder } from "react-icons/si";
 import { TbBrandShopee } from "react-icons/tb";
-import { useEffect, useState } from "react";
-
-import { FaTicketAlt } from "react-icons/fa";
+import { FaTicketAlt } from "react-icons/fa"; // أيقونة للكوبونات
 
 const sidebarGroups = [
   {

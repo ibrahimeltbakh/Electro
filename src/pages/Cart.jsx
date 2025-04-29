@@ -52,7 +52,6 @@ export default function Cart() {
   const [userTakeCoupon, setUserTakeCoupon] = useState(false);
   const [finalTotal, setfinalTotal] = useState(data?.cart?.totalCartPrice);
   const { data: coupons } = useGetCoupons();
-
   useEffect(() => {
     if (data?.cart?.totalCartPrice) {
       setfinalTotal(data?.cart?.totalCartPrice);
