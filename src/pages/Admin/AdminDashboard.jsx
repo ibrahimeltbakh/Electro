@@ -6,10 +6,10 @@ import { BiSolidDownArrowAlt } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { AiOutlineProduct } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
-
 import { TbBrandShopee } from "react-icons/tb";
-import { FaTicketAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
+
+import { FaTicketAlt } from "react-icons/fa";
 
 const sidebarGroups = [
   {
