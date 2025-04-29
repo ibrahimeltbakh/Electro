@@ -14,6 +14,12 @@ export const GetOrders = async () => {
     return response.data;
 };
 
+export const removeOrder = async (orderId) => {
+    const response = await api.delete(`/orders/${orderId}`, {
+        headers: { token: getToken() },
+    });
+    return response.data;
+}
 
 
 

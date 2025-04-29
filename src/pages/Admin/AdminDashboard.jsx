@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Sidebar } from "../../components/Admin/sidebar/Sidebar";
 import { SidebarGroup } from "../../components/Admin/sidebar/SidebarGroup";
 import { SidebarItem } from "../../components/Admin/sidebar/SidebarItem";
@@ -6,9 +6,10 @@ import { BiSolidDownArrowAlt } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { AiOutlineProduct } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
-import { SiBrandfolder } from "react-icons/si";
+
 import { TbBrandShopee } from "react-icons/tb";
-import { FaTicketAlt } from "react-icons/fa"; // أيقونة للكوبونات
+import { FaTicketAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 const sidebarGroups = [
   {
@@ -46,11 +47,30 @@ const sidebarGroups = [
 ];
 
 const AdminDashboard = () => {
+  const [activeGroup, setActiveGroup] = useState(null);
+  const [isHomeActive, setIsHomeActive] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/admin/home") {
+      setIsHomeActive(true);
+      setActiveGroup(null);
+    } else {
+      setIsHomeActive(false);
+    }
+  }, [location.pathname]);
+
   return (
     <div className="flex">
       <Sidebar>
         {/* Home Item */}
-        <div className="border font-semibold rounded mb-5 flex items-center justify-center">
+        <div
+          className={`border font-semibold rounded mb-5 flex items-center justify-center px-3 py-1 
+          ${
+            isHomeActive
+              ? "bg-blue-600 text-white"
+              : "text-blue-600 hover:bg-[hsl(var(--sidebar-accent))]"
+          }`}>
           <FaHome />
           <SidebarItem label="Home" to="/admin" />
         </div>
@@ -59,6 +79,8 @@ const AdminDashboard = () => {
         {sidebarGroups.map((group, index) => (
           <SidebarGroup
             key={index}
+            isActive={activeGroup === index}
+            onClick={() => setActiveGroup(index)}
             title={
               <span className="flex justify-between items-center gap-1 h-8">
                 <span className="flex flex-row items-center gap-1">

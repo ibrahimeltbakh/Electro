@@ -83,8 +83,8 @@ export default function Categories() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12">
-        <div className="mb-10">
+      <div className="container mx-auto px-4 py-12 ">
+        <div className="my-10">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
             All Categories
           </h2>
@@ -94,7 +94,7 @@ export default function Categories() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
           {filteredCategories.map((category, index) => (
             <motion.div
               key={category._id}

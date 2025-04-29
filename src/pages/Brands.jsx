@@ -53,7 +53,7 @@ export default function Brands() {
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        <div className="mb-10">
+        <div className="my-10">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
             Browse Our Brands
           </h2>
@@ -63,19 +63,19 @@ export default function Brands() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-10">
           {filteredBrands?.map((brand, index) => (
             <motion.div
               key={brand._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="group">
+              className="group ">
               <Link
                 to={`/brands/${brand.name}`}
-                className="block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full">
+                className="block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full ">
                 <div className="relative p-6 flex flex-col items-center">
-                  <div className="h-32 w-full flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg mb-6 overflow-hidden relative">
+                  <div className="h-32  w-full flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg mb-6 overflow-hidden relative">
                     <motion.img
                       src={brand.image.secure_url}
                       alt={brand.name}
