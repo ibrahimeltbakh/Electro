@@ -55,9 +55,9 @@ const Footer = () => {
               <h5 className=" text-black  dark:text-white font-semibold mb-3">HELP</h5>
               <ul className="space-y-2  text-black  dark:text-white text-sm">
                 <li><Link to="/contact">Customer Support</Link></li>
-                <li><Link to="/">Delivery Details</Link></li>
-                <li><Link to="/">Terms & Conditions</Link></li>
-                <li><Link to="/">Privacy Policy</Link></li>
+                <li><Link to="/help">Delivery Details</Link></li>
+                <li><Link to="/help">Terms & Conditions</Link></li>
+                <li><Link to="/help">Privacy Policy</Link></li>
               </ul>
             </div>
             <div>
@@ -72,10 +72,10 @@ const Footer = () => {
             <div>
               <h5 className=" text-black  dark:text-white font-semibold mb-3">RESOURCES</h5>
               <ul className="space-y-2  text-black  dark:text-white text-sm">
-                <li><Link to="/">Free eBooks</Link></li>
-                <li><Link to="/">Development Tutorials</Link></li>
-                <li><Link to="/">How to - Blog</Link></li>
-                <li><Link to="/">Youtube Playlist</Link></li>
+                <li><Link to="/contact">Free eBooks</Link></li>
+                <li><Link to="/contact">Development Tutorials</Link></li>
+                <li><Link to="/contact">How to - Blog</Link></li>
+                <li><Link to="/contact">Youtube Playlist</Link></li>
               </ul>
             </div>
           </div>
