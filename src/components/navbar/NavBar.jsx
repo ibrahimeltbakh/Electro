@@ -54,7 +54,7 @@ export default function NavBar() {
         {/* Logo */}
         <NavLink
           to="/"
-          className="text-2xl font-bold text-blue-600 dark:text-white">
+          className="relative inline-block text-2xl font-bold text-black dark:text-white mb-4 after:content-[''] after:absolute after:top-3/4 after:translate-y-[-50%] after:left-full after:m1/4 after:w-1 after:h-1 after:bg-yellow-400 after:rounded-full">
           Electro
         </NavLink>
 

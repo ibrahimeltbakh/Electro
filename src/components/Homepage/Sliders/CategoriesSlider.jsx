@@ -104,12 +104,12 @@ const CategoriesSlider = () => {
                     transition={{ duration: 0.3 }}
                     className="flex flex-col items-center cursor-pointer"
                   >
-                    <div className="w-32 h-32 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4 overflow-hidden shadow-md relative group">
+                    <div className="w-40 h-40 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4 overflow-hidden shadow-md relative group">
                       <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <img
                         src={category.image.secure_url}
                         alt={category.name}
-                        className="w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-full object-contain group-hover:scale-120 transition-transform duration-300"
                       />
                     </div>
                     <h3 className="text-center font-medium text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{category.name}</h3>
