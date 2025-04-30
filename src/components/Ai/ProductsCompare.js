@@ -1,6 +1,8 @@
 import OpenAI from "openai";
 
 const ProductsComare = async ({ voiceText, products }) => {
+  console.log(JSON.stringify(products));
+  
   const openaiApiKey = import.meta.env.VITE_OPENAI_KEY;
   const openai = new OpenAI({
     apiKey: openaiApiKey,
