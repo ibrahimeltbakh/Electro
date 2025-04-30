@@ -184,7 +184,7 @@ export default function ProductsPage() {
   const currentProducts = isFilterApplied
     ? filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
     : productsData?.products?.slice(indexOfFirstProduct, indexOfLastProduct) ||
-      [];
+    [];
 
   const totalProducts = isFilterApplied
     ? filteredProducts.length
@@ -226,15 +226,19 @@ export default function ProductsPage() {
                 className="w-full py-3 px-5 pr-12 rounded-full border-0 shadow-lg focus:ring-2 bg-white text-gray-500 placeholder:text-gray-400  focus:ring-blue-500 outline-none"
               />
               <div className="flex gap-2 justify-between items-center">
+            
                 <button
                   type="button"
                   onClick={startListening}
-                  className="absolute right-10 top-1/2 transform -translate-y-1/2 text-blue-600 p-1">
+                  className="absolute right-13 top-1/2 transform -translate-y-1/2 text-blue-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+                >
                   <MdOutlineKeyboardVoice size={24} />
                 </button>
+
                 <button
                   type="submit"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-600 p-1">
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+                >
                   <FaSearch size={20} />
                 </button>
               </div>
@@ -256,20 +260,18 @@ export default function ProductsPage() {
             <div className="hidden sm:flex items-center space-x-2">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`p-2 rounded ${
-                  viewMode === "grid"
-                    ? "bg-blue-100 dark:bg-blue-900/50 text-blue-600"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}>
+                className={`p-2 rounded ${viewMode === "grid"
+                  ? "bg-blue-100 dark:bg-blue-900/50 text-blue-600"
+                  : "text-gray-500 dark:text-gray-400"
+                  }`}>
                 <FaThLarge />
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`p-2 rounded ${
-                  viewMode === "list"
-                    ? "bg-blue-100 dark:bg-blue-900/50 text-blue-600"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}>
+                className={`p-2 rounded ${viewMode === "list"
+                  ? "bg-blue-100 dark:bg-blue-900/50 text-blue-600"
+                  : "text-gray-500 dark:text-gray-400"
+                  }`}>
                 <FaThList />
               </button>
             </div>
@@ -310,9 +312,8 @@ export default function ProductsPage() {
 
         <div className="flex flex-wrap -mx-4">
           <div
-            className={`fixed inset-0 z-50 transform ${
-              mobileFiltersOpen ? "translate-x-0" : "-translate-x-full"
-            } lg:static lg:z-0 lg:translate-x-0 lg:w-1/4 px-4 transition-transform duration-300 ease-in-out`}>
+            className={`fixed inset-0 z-50 transform ${mobileFiltersOpen ? "translate-x-0" : "-translate-x-full"
+              } lg:static lg:z-0 lg:translate-x-0 lg:w-1/4 px-4 transition-transform duration-300 ease-in-out`}>
             <div className="h-full lg:h-auto overflow-y-auto bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg lg:shadow-md">
               <div className="flex justify-between items-center mb-6 lg:mb-4">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -480,11 +481,10 @@ export default function ProductsPage() {
                       <button
                         onClick={() => paginate(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className={`p-2 rounded-md ${
-                          currentPage === 1
-                            ? "text-gray-400 cursor-not-allowed"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        }`}>
+                        className={`p-2 rounded-md ${currentPage === 1
+                          ? "text-gray-400 cursor-not-allowed"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          }`}>
                         <FaArrowLeft />
                       </button>
 
@@ -492,11 +492,10 @@ export default function ProductsPage() {
                         <button
                           key={i}
                           onClick={() => paginate(i + 1)}
-                          className={`px-4 py-2 rounded-md ${
-                            currentPage === i + 1
-                              ? "bg-blue-600 text-white"
-                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                          }`}>
+                          className={`px-4 py-2 rounded-md ${currentPage === i + 1
+                            ? "bg-blue-600 text-white"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            }`}>
                           {i + 1}
                         </button>
                       ))}
@@ -504,11 +503,10 @@ export default function ProductsPage() {
                       <button
                         onClick={() => paginate(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className={`p-2 rounded-md ${
-                          currentPage === totalPages
-                            ? "text-gray-400 cursor-not-allowed"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        }`}>
+                        className={`p-2 rounded-md ${currentPage === totalPages
+                          ? "text-gray-400 cursor-not-allowed"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          }`}>
                         <FaArrowUp className="transform rotate-90" />
                       </button>
                     </nav>

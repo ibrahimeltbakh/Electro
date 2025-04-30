@@ -23,12 +23,14 @@ import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
 import Support from "@/pages/Support";
 import Help from "@/pages/Help";
 import ProductsComparison from "@/pages/ProductsComparison";
+import HelpPage from './../pages/HelpPage';
 
 const pageRoutes = [
   { path: "/", element: <Home /> },
   { path: "/shop", element: <ProductsPage /> },
   { path: "/categories", element: <Categories /> },
   { path: "/brands", element: <Brands /> },
+  {path:"/help", element:<HelpPage/>  },
   {
     path: "/brands/:id",
     element: <BrandDetail />,
@@ -44,10 +46,6 @@ const pageRoutes = [
   {
     path: "/contact",
     element: <Support />,
-  },
-  {
-    path: "/help",
-    element: <Help />,
   },
   {
     path: "/comparison",
