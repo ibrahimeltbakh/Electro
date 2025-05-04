@@ -1,8 +1,7 @@
 const NewsLetter = () => {
   return (
-    <section className="w-full  mx-auto py-16 bg-gradient-to-r from-blue-50 to-blue-300">
+    <section className="w-full mx-auto py-16 bg-gradient-to-r from-blue-50 to-blue-300">
       <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* النص */}
         <div className="md:w-1/2 space-y-4 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
             Our <span className="text-blue-600">Newsletter</span>
@@ -12,13 +11,17 @@ const NewsLetter = () => {
           </p>
         </div>
 
-        {/* الفورم */}
         <div className="md:w-1/2">
-          <form className="   flex flex-col  sm:flex-row  items-center justify-center gap-4">
+          <form
+            action="https://formspree.io/f/xblognra"
+            method="POST"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
-              className="  w-full sm:w-auto px-4 py-3 rounded-full border border-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300"
+              required
+              className="w-full sm:w-auto px-4 py-3 rounded-full border border-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300"
             />
             <button
               type="submit"
