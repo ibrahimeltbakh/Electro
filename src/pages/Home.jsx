@@ -68,15 +68,12 @@ export default function Home() {
           <RecentProducts numberOfProducts={6} start={8} name={'New Arrivals'} showSlider={true} />
         </section>
 
-        <section className="bg-white dark:bg-gray-800">
+        {/* <section className="bg-white dark:bg-gray-800">
           <OurCustummer />
         </section>
-        
+         */}
      
-        
-        
-        
-      
+
       </div>
     </motion.div>
   )
