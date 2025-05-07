@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-
+import ElectroMobile from "./Electro Mobile.png";
 const Footer = () => {
   return (
     <footer className="w-full bg-gray-50 text-black dark:bg-gray-900 dark:text-white">
@@ -99,28 +99,22 @@ const Footer = () => {
                 <li>
                   <Link to="/cart">My Cart</Link>
                 </li>
-
               </ul>
             </div>
 
             <div>
               <h5 className="text-black dark:text-white font-semibold mb-3">
-                RESOURCES
+                <a
+                  href="https://drive.google.com/drive/folders/1uNwaWDjxbgqwR2EUJ3Yb_mRpKygqoxQ-"
+                  target="_blank">
+                  Mobile App
+                </a>
               </h5>
-              <ul className="space-y-2 text-black dark:text-white text-sm">
-                <li>
-                  <Link to="/help">eBooks</Link>
-                </li>
-                <li>
-                  <Link to="/help">Tutorials</Link>
-                </li>
-                <li>
-                  <Link to="/help">Blogs</Link>
-                </li>
-                <li>
-                  <Link to="/help">Videos</Link>
-                </li>
-              </ul>
+              <img
+                className="w-30 h-30"
+                src={ElectroMobile}
+                alt="Electro Mobile"
+              />
             </div>
           </div>
         </div>
