@@ -64,7 +64,7 @@ const Footer = () => {
               <h5 className=" text-black  dark:text-white font-semibold mb-3">FAQ</h5>
               <ul className="space-y-2  text-black  dark:text-white text-sm">
                 <li><Link to="/profile/account">Account</Link></li>
-                <li><Link to="/home">Manage Deliveries</Link></li>
+                <li><Link to="/">Manage Deliveries</Link></li>
                 <li><Link to="/profile/orders">Orders</Link></li>
                 <li><Link to="/cart">Payments</Link></li>
               </ul>

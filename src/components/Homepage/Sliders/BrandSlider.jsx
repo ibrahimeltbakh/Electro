@@ -103,7 +103,7 @@ const BrandSlider = () => {
           <Slider {...settings}>
             {data?.brands?.map((brand) => (
               <div key={brand._id} className="px-4">
-                <Link to={`/brand/${brand.name}`}>
+                <Link to={`/brands/${brand.name}`}>
                   <motion.div 
                     whileHover={{ y: -8, scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
                     transition={{ duration: 0.3 }}

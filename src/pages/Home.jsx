@@ -60,16 +60,23 @@ export default function Home() {
         </section>
         
         <section className="bg-white dark:bg-gray-800">
+          <RecentProducts numberOfProducts={6} start={12} name={'Popular Items'} showSlider={true} />
+        </section>
+
+      {/* new change for test*/ }
+        <section className="bg-gray-50 dark:bg-gray-900">
           <RecentProducts numberOfProducts={6} start={8} name={'New Arrivals'} showSlider={true} />
         </section>
-        
-        <section className="bg-gray-50 dark:bg-gray-900">
+
+        <section className="bg-white dark:bg-gray-800">
           <OurCustummer />
         </section>
         
-        <section className="bg-white dark:bg-gray-800">
-          <RecentProducts numberOfProducts={6} start={12} name={'Popular Items'} showSlider={true} />
-        </section>
+     
+        
+        
+        
+      
       </div>
     </motion.div>
   )
